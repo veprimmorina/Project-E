@@ -10,6 +10,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+var devCorsPolicy = "devCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(devCorsPolicy, builder => {
+        //builder.WithOrigins("http://localhost:800").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
+        //builder.SetIsOriginAllowed(origin => true);
+    });
+});
 
 var app = builder.Build();
 
@@ -20,10 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
- app.UseCors("corsapp");
 
+     app.UseCors(devCorsPolicy);
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();
