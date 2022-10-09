@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication2;
+using WebApplication2.Controllers;
+using WebApplication2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
@@ -33,5 +35,7 @@ app.UseCors(builder =>
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapProductEndpoints();
 
 app.Run();
