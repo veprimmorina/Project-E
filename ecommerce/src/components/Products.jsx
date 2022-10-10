@@ -35,12 +35,13 @@ function Products() {
             <div className="d-flex justify-content-between mb-2">
               <p className="text-muted mb-0">Available: <span className="fw-bold">6</span></p>
               <div className="ms-auto ">
+              <div className='border border-dark border-radius'>
                <span className='quantity'>
                 <button><i class="bi bi-dash-circle mr-2"></i></button>
                <input id="quantity" min="1" type="number" value="1" max="1" className='text-center' />
                <button><i class="bi bi-plus-circle"></i></button>
-
                </span>
+               </div>
               </div>
             </div>
           </div>
