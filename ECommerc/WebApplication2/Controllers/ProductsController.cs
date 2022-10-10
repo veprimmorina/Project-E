@@ -41,6 +41,12 @@ namespace WebApplication2.Controllers
         {
             return await _context.products.Where(x => x.Category.Equals("Produkte Qumeshti")).ToListAsync();
         }
+
+        [HttpGet("category/meat/products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetMeatProduct()
+        {
+            return await _context.products.Where(x => x.Category.Equals("Produkte Mishi")).ToListAsync();
+        }
         // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
