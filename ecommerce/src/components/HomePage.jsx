@@ -1,4 +1,6 @@
 import React from 'react'
+import Footer from './Footer'
+
 import Navbar from './NavBar'
 import Products from './Products'
 import Productss from './Productss'
@@ -11,6 +13,7 @@ function HomePage() {
    <Slider />
    <Products />
    <Products />
+   <Footer />
    </>
   )
 }
