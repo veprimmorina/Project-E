@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -11,6 +12,12 @@
 }
 .quantity{
   width: 10px;
+}
+#card-title{
+  background-color: #e15a26;
+}
+.cart-body{
+  min-height: 650px;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
