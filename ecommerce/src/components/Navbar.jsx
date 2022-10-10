@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import NavLinks from "./NavLinks";
-
+import 'react-bootstrap-icons';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <nav className="nav">
+    <nav className="bg-white">
       <div className="flex items-center font-medium justify-around">
         <div className="z-50 p-5 md:w-auto w-full flex justify-between">
-          <img src="https://scontent.fprn7-1.fna.fbcdn.net/v/t39.30808-6/273304122_104761045462704_466202192586999596_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=VbZLzPnwngsAX-4jlw-&_nc_oc=AQmWKs4A5Pvigrcpv8645PB9jYYNW6FxOVy99rzSFfERnHktwEif4xMug9OCtJo5moA&_nc_ht=scontent.fprn7-1.fna&oh=00_AT-ie5fRbdjs_GVA1VKIEQIuwT1JKEfDRMNXXnzG8Iq97w&oe=63481F4A" alt="logo" className="md:cursor-pointer h-9" />
+          <img src="" alt="logo" className="md:cursor-pointer h-9" />
           <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
-          { /*<ion-icon name={`${open ? "close" : "menu"}`}></ion-icon> */}
-          <i class="bi bi-list">More</i>
+            <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
+            <i class="bi bi-facebook">more</i>
           </div>
         </div>
         <ul className="md:flex hidden uppercase items-center gap-8 font-[Poppins]">

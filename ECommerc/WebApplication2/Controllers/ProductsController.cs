@@ -34,6 +34,13 @@ namespace WebApplication2.Controllers
             string emri = "Vegane";
             return await _context.products.Where(x => x.Category.Equals(emri)).ToListAsync();
         }
+
+        [HttpGet("category/dairy/products")]
+
+        public async Task<ActionResult<IEnumerable<Product>>> GetDairyProducts()
+        {
+            return await _context.products.Where(x => x.Category.Equals("Produkte Qumeshti")).ToListAsync();
+        }
         // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)

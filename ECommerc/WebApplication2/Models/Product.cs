@@ -16,6 +16,8 @@ namespace WebApplication2.Models
         public string Category { get; set; }
         public int Quantity { get; set; }
 
+        public string PhotoPath { get; set; }
+
 
     }
 

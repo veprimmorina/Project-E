@@ -1,13 +1,17 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Navbar from './NavBar'
+import Products from './Products'
+import Productss from './Productss'
 import Slider from './Slider'
 
 function HomePage() {
   return (
-    <div>
-        <Navbar />
-        <Slider />
-    </div>
+    <>
+   <Navbar />
+   <Slider />
+   <Products />
+   <Products />
+   </>
   )
 }
 
