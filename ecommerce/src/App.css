@@ -17,7 +17,10 @@
   background-color: #e15a26;
 }
 .cart-body{
-  min-height: 650px;
+  height: 250px;
+}
+.clickable{
+  cursor: pointer;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
