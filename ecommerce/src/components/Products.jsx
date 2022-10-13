@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import ItemCard from './ItemCard';
-
-
-const Products = ({ handleClick})=> {
+const Products = ({ item, handleClick})=> {
   const [productQuantity, setQuantity] = useState(1);
   function minusProduct(){
     if(productQuantity>1){
@@ -46,7 +44,7 @@ const Products = ({ handleClick})=> {
               </div>
               
               </div>
-              <i className="ml-5 mr-5 mt-2 bi bi-cart4 bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong clickable"  style={{width: "35px", height: "35px"}} onClick={()=> handleClick()}></i>
+              <i className="ml-5 mr-5 mt-2 bi bi-cart4 bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong clickable"  style={{width: "35px", height: "35px"}}></i>
             </div>
           </div>
         </div>

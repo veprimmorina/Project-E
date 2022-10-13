@@ -1,22 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import { CartProvider } from 'react-use-cart';
-import ShoppingCart from './components/ShoppingCart';
+import HomePage from "./components/HomePage";
+const App = () => {
 
 
-function App() {
+
   return (
-    
-   <BrowserRouter>
+    <>
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage />}></Route>
     </Routes>
    </BrowserRouter>
-   
-  
+    </>
   );
-}
+};
 
 export default App;
+

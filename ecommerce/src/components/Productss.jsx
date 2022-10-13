@@ -1,12 +1,14 @@
-import React from 'react'
-import Products from './Products'
+import React from 'react';
 
-function Productss() {
+
+export default function Main(props) {
+  const { products, onAdd } = props;
   return (
-    <div>
-        <Products />
-    </div>
-  )
+    <main className="block col-2">
+      <h2>Products</h2>
+      <div className="row">
+     
+      </div>
+    </main>
+  );
 }
-
-export default Productss
