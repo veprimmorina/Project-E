@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Products from './Products'
 import Productss from './Productss'
@@ -10,11 +10,12 @@ import Amazon from './amazon'
 import Cart from './cart'
 import Banners from './Banners'
 import axios from 'axios'
-
+import TopProducts from './TopProducts'
+import AmazonTopProducts from './amazonTopProducts'
 function HomePage() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
-
+  const [topProducts,setTopProducts] = useState([])
  
   const handleClick = (item) => {
     if (cart.indexOf(item) !== -1) return;
@@ -29,6 +30,7 @@ function HomePage() {
     if (arr[ind].amount === 0) arr[ind].amount = 1;
     setCart([...arr]);
   };
+
   return (
     <>
    <Navbar />
@@ -44,8 +46,13 @@ function HomePage() {
    <div>
     <Banners />
    </div>
+   <h2 className='text-center'>Top Products</h2>
+   <div className='row bg-dark '>
+    <div className='col'>
+    <AmazonTopProducts handleClick={handleClick} />
+   </div>
+   </div>
    <Footer />
-   
    </>
   )
 }

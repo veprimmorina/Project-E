@@ -19,6 +19,7 @@ namespace WebApplication2.Models
         public string PhotoPath { get; set; }
 
         public int amount { get; set; }
+        public int sold { get; set; }
 
     }
 
