@@ -15,11 +15,7 @@ function HomePage() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
 
-  function getG(){
-    return axios.get("https://localhost:7103/api/Customers").then(response=>{
-      console.log(response.data)
-    });
-  }
+ 
   const handleClick = (item) => {
     if (cart.indexOf(item) !== -1) return;
     setCart([...cart, item]);
@@ -47,7 +43,6 @@ function HomePage() {
    </div>
    <div>
     <Banners />
-    <button onClick={()=>getG()}>kliko</button>
    </div>
    <Footer />
    

@@ -1,27 +1,27 @@
 import React from "react";
 
 const Cards = ({ item, handleClick }) => {
-  const { title, available, price, img } = item;
+  const { name, quantity, price, photoPath, category } = item;
   return (
     <>
     {
-      item.available==0 ? <> <div className="col-md-6 col-lg-4 mb-4 mb-md-0 mt-3" >
+      item.quantity==0 ? <> <div className="col-md-6 col-lg-4 mb-4 mb-md-0 mt-3" >
         <div>
       <div className="card shadow">
         <div className="d-flex justify-content-between p-3 sold">
-          <p className="lead mb-0">Vegane</p> 
+          <p className="lead mb-0">{category}</p> 
             <img classname="avatar rounded-circle img-fluid"  src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
         </div>
-        <img src={img}
+        <img src={photoPath}
           className="card-img-top sold" alt="Laptop" />
           <b className="text-danger border border-danger rounded text-center bold">SOLD</b>
         <div className="card-body sold">
           <div className="d-flex justify-content-between">
             <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
-            <p className="text-muted mb-0">Available: <span className="fw-bold">{available}</span></p>
+            <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
           </div>
           <div className="d-flex justify-content-between mb-3">
-            <h5 className="mb-0">{title}</h5>
+            <h5 className="mb-0">{name}</h5>
             <h5 className="text-danger mb-0">{price} €</h5>
           </div>
           <div className="d-flex justify-content-center">
@@ -33,18 +33,18 @@ const Cards = ({ item, handleClick }) => {
       </>:  <div className="col-md-6 col-lg-4 mb-4 mb-md-0 mt-3" >
       <div className="card shadow">
         <div className="d-flex justify-content-between p-3">
-          <p className="lead mb-0">Vegane</p> 
+          <p className="lead mb-0">{category}</p> 
             <img classname="avatar rounded-circle img-fluid" src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
         </div>
-        <img src={img}
+        <img src={photoPath}
           className="card-img-top" alt="Laptop" />
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
-            <p className="text-muted mb-0">Available: <span className="fw-bold">{available}</span></p>
+            <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
           </div>
           <div className="d-flex justify-content-between mb-3">
-            <h5 className="mb-0">{title}</h5>
+            <h5 className="mb-0">{name}</h5>
             <h5 className="text-danger mb-0">{price} €</h5>
           </div>
           <div className="d-flex justify-content-center">

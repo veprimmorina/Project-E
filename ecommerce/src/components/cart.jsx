@@ -47,19 +47,19 @@ const Cart = ({ cart, setCart, handleChange }) => {
       {cart.map((item) => (
         <tr className='border shadow-sm' id={item.id}>
           <td className="clickable" onClick={() => handleRemove(item.id)}>x</td>
-        <td><img src={item.img} className='img-fluid' alt='product' width="45px" heigth="40px"/> </td>
-       <td>{item.title}</td>
+        <td><img src={item.photoPath} className='img-fluid' alt='product' width="45px" heigth="40px"/> </td>
+       <td>{item.name}</td>
        <td>{item.price}$</td>
        <td> <span className='quantity'>
                 <button ><i class="bi bi-dash-circle " onClick={() => handleChange(item, -1)} ></i></button>
                <input id="quantity" min="1" type="number" max="1" value={item.amount} className='text-center' />
                <button><i class="bi bi-plus-circle" onClick={() => handleChange(item, 1)}></i></button>
                </span></td>
-      <td>{item.price*item.amount}$</td>
+      <td>{(item.price*item.amount).toFixed(2)}€</td>
        </tr>
        ))}
       </table>
-      <span className="">Total price: {price} $</span>
+      <span className="">Total price: {price.toFixed(2)} $</span>
       <button className='btn btn-primary mt-2' onClick={()=>getProducts()}>Order</button>
    
     </Card.Text>

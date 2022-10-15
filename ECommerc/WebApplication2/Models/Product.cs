@@ -15,9 +15,10 @@ namespace WebApplication2.Models
         public double Price { get; set; }
         public string Category { get; set; }
         public int Quantity { get; set; }
-
+        [Column(TypeName = "nvarchar(100)")]
         public string PhotoPath { get; set; }
 
+        public int amount { get; set; }
 
     }
 
