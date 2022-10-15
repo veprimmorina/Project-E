@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.row{
+    background-color: rgb(238, 238, 238);
+}
 .sold{
     opacity: 50%;
 }

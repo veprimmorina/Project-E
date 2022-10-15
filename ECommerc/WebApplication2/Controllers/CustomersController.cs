@@ -23,7 +23,6 @@ namespace WebApplication2.Controllers
         }
 
         // GET: api/Customers
-        [EnableCors("AllowReactApp")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> Getcustomers()
         {

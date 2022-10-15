@@ -4,7 +4,6 @@ using WebApplication2.Controllers;
 using WebApplication2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -12,6 +11,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyAllowedOrigins",
+                      policy =>
+                      {
+                          policy.WithOrigins("*"); // add the allowed origins
+                      });
+});
 
 
 var app = builder.Build();
@@ -26,12 +33,7 @@ if (app.Environment.IsDevelopment())
 
  
 app.UseHttpsRedirection();
-app.UseCors(builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-});
+app.UseCors("MyAllowedOrigins");
 app.UseAuthorization();
 
 app.MapControllers();

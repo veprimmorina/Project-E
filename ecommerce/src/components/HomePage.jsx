@@ -8,11 +8,18 @@ import ShoppingCart from './ShoppingCart'
 import { Navbar } from 'react-bootstrap'
 import Amazon from './amazon'
 import Cart from './cart'
+import Banners from './Banners'
+import axios from 'axios'
 
 function HomePage() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
 
+  function getG(){
+    return axios.get("https://localhost:7103/api/Customers").then(response=>{
+      console.log(response.data)
+    });
+  }
   const handleClick = (item) => {
     if (cart.indexOf(item) !== -1) return;
     setCart([...cart, item]);
@@ -37,6 +44,10 @@ function HomePage() {
    <div className='col mt-5'>
         <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
     </div>
+   </div>
+   <div>
+    <Banners />
+    <button onClick={()=>getG()}>kliko</button>
    </div>
    <Footer />
    
