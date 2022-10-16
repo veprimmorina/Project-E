@@ -5,17 +5,25 @@ import Productss from './Productss'
 import Slider from './Slider'
 import Card from 'react-bootstrap/Card';
 import ShoppingCart from './ShoppingCart'
-import { Navbar } from 'react-bootstrap'
+import { Button, Navbar } from 'react-bootstrap'
 import Amazon from './amazon'
 import Cart from './cart'
 import Banners from './Banners'
 import axios from 'axios'
 import TopProducts from './TopProducts'
 import AmazonTopProducts from './amazonTopProducts'
+import { Box } from 'react-bootstrap-icons'
+import { Modal } from 'react-bootstrap'
+import Header from './Header'
 function HomePage() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
   const [topProducts,setTopProducts] = useState([])
+  const [showM, setShowM] = useState(false);
+
+  const handleClose = () => setShowM(false);
+  const handleShow = () => setShowM(true);
+  
  
   const handleClick = (item) => {
     if (cart.indexOf(item) !== -1) return;
@@ -33,7 +41,7 @@ function HomePage() {
 
   return (
     <>
-   <Navbar />
+   <Header />
    <Slider />
    <div className='row' style={{backgroundColor: "rgb(238, 238, 238)"}}>
     <div className='col'>

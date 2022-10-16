@@ -10,3 +10,12 @@
 .clickable{
     cursor: pointer;
   }
+#bg{
+    background-color: rgb(238, 238, 238);
+}
+.header{
+    background-color: rgb(225, 90, 38);;
+}
+.navbar-nav{
+    margin-left: 260px;
+}

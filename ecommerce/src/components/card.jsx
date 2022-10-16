@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Cards = ({ item, handleClick }) => {
   const { name, quantity, price, photoPath, category } = item;
+  const [search,setSearch]=useState(localStorage.getItem(10))
+
+  useEffect(()=>{
+  })
   return (
     <>
     {
