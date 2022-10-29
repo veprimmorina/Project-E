@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Form, Modal } from "react-bootstrap";
+import axios from "axios";
+import $ from 'jquery'
+import { Link } from "react-router-dom";
 
 
 const Cart = ({ cart, setCart, handleChange }) => {
   const [price, setPrice] = useState(0);
-  const [product,setProduct]=useState([]);
+  const [product,setProduct]=useState(4);
   const [showM, setShowM] = useState(false);
   const [errorMessage, setErrorMessage]=useState('');
+  const [email, setEmail]=useState();
+  const [name, setName]= useState();
+  const [surname, setSurname]= useState();
+  const [address, setAdress]= useState();
   const handleClose = () => setShowM(false);
   const handleShow = () => setShowM(true);
   
@@ -43,22 +50,56 @@ const Cart = ({ cart, setCart, handleChange }) => {
   
   useEffect(() => {
     handlePrice();
+    
   });
 
   function getProducts (){
-    cart.map((item)=>(
-       setPreProduct(item.id,item.amount)
-    ));
-    
+   /* axios.post('https://localhost:7103/api/Products/get/cart',cart).then(response=>{
+      console.log('success');
+    })  
+    */
+    axios.post('https://localhost:7103/api/Products/send/'+email+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
+      console.log(response.data);
+      console.log(cart)
+    }) 
+   
+    /*
+    $.ajax({
+      url: "http://localhost:9000/api/reservation/regjistro/produktin",
+      type: "post",
+    contentType: "application/json; charset=utf-8",
+    //dataType: "json",
+    data: JSON.stringify(cart),
+      //data: JSON.stringify(user),
+      success: function (data) {
+          console.log("success")
+      },
+      error: function (request, status, error) {
+          console.log(error);
+          console.log(status);
+      },
+  });
+  */
   }
-  function setPreProduct(id,amount){
-          setProduct([product,{id:id, amount:amount}]);
-     console.log(product)
+  function getName(val){
+    setName(val.target.value)
+  }
+  function getSurname(val){
+    setSurname(val.target.value)
+  }
+  function getAdress(val){
+    setAdress(val.target.value)
+  }
+
+  function getEmail(val){
+    setEmail(val.target.value)
   }
 
   return (
+    
     <article>
         <>
+        
         <Card className='shadow-lg mt-lg-3'>
     <Card.Title id="card-title" className='d-flex justify-content-between rounded' style={{background: "#e15a26"}}>
     <i className="ml-5 mr-5 mt-2 bi bi-cart4 bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong "  style={{width: "35px", height: "35px"}}></i>
@@ -92,10 +133,12 @@ const Cart = ({ cart, setCart, handleChange }) => {
                </span></td>
       <td>{(item.price*item.amount).toFixed(2)}€</td>
        </tr>
+             
+
        ))}
       </table>
       <p className="text-center text-danger h5 mt-3 mb-3">{errorMessage}</p>
-         {price>0 ?<> <span className="">Total price: {price.toFixed(2)} €</span> <Button variant="primary" onClick={handleShow}> <h5 onClick={()=>getProducts()}>Order</h5>  </Button> </>: ""}
+         {price>0 ?<> <span className="">Total price: {price.toFixed(2)} €</span> <Button variant="primary" onClick={handleShow}> <h5>Order</h5>  </Button> </>: ""}
        
    
     </Card.Text>
@@ -109,25 +152,27 @@ const Cart = ({ cart, setCart, handleChange }) => {
            <Form>
             <Form.Group>
               <Form.Label>Name:</Form.Label>
-              <Form.Control type="text"></Form.Control>
+              <Form.Control type="text" onChange={getName}></Form.Control>
             </Form.Group>
             <Form.Label>Surname:</Form.Label>
-            <Form.Control type="text"></Form.Control>
+            <Form.Control type="text"onChange={getSurname}></Form.Control>
             <Form.Label>Email:</Form.Label>
-            <Form.Control type="email"></Form.Control>
+            <Form.Control type="email" onChange={getEmail}></Form.Control>
             <Form.Label>Password</Form.Label>
             <Form.Control type="password"></Form.Control>
             <Form.Label>Adress:</Form.Label>
-            <Form.Control type="text"></Form.Control>
+            <Form.Control type="text" onChange={getAdress}></Form.Control>
            </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
+            <Link to='/success' >
             <Button variant="primary" onClick={()=>getProducts()}>
               Save Changes
             </Button>
+            </Link>
           </Modal.Footer>
         </Modal>
         </>

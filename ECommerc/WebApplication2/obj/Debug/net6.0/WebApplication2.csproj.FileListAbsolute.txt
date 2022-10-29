@@ -531,3 +531,7 @@ C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Sys
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\MailKit.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\MimeKit.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\itextsharp.dll

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication2;
 using WebApplication2.Controllers;
 using WebApplication2.Models;
+using WebApplication2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -16,7 +17,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "MyAllowedOrigins",
                       policy =>
                       {
-                          policy.WithOrigins("*"); // add the allowed origins
+                          policy.WithOrigins("*");
+                          policy.WithHeaders("*");
+                          // add the allowed origins
                       });
 });
 

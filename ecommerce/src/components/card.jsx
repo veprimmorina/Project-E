@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Cards = ({ item, handleClick }) => {
-  const { name, quantity, price, photoPath, category } = item;
-  const [search,setSearch]=useState(localStorage.getItem(10))
+  const { id, name, quantity, price, photoPath, category } = item;
 
-  useEffect(()=>{
-  })
   return (
     <>
     {
@@ -16,9 +14,11 @@ const Cards = ({ item, handleClick }) => {
           <p className="lead mb-0">{category}</p> 
             <img classname="avatar rounded-circle img-fluid"  src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
         </div>
+        
         <img src={photoPath}
           className="card-img-top sold" alt="Laptop" />
           <b className="text-danger border border-danger rounded text-center bold">SOLD</b>
+         
         <div className="card-body sold">
           <div className="d-flex justify-content-between">
             <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
@@ -40,8 +40,10 @@ const Cards = ({ item, handleClick }) => {
           <p className="lead mb-0">{category}</p> 
             <img classname="avatar rounded-circle img-fluid" src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
         </div>
+        <Link to={'/products/'+id} target="_blank">
         <img src={photoPath}
           className="card-img-top" alt="Laptop" />
+          </Link>
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <p className="small"><a href="#!" className="text-muted">Laptops</a></p>

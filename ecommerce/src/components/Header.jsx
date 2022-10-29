@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Header() {
-    const [data,setData]=useState(null);
-    function getData(val){
-        setData(val.target.value)
-    }
-    function getProducts(){
-        alert(data)
-        localStorage.setItem(10,data)
-    }
+
+  
     return (
         <Navbar expand="lg"  className='header'>
           <Container>
@@ -19,8 +14,8 @@ function Header() {
               <Nav className="me-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown title="Products" id="basic-nav-dropdown">
+                  <NavDropdown.Item>Vegan</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
                     Another action
                   </NavDropdown.Item>
@@ -32,10 +27,10 @@ function Header() {
                 </NavDropdown>
               </Nav>
               <Form className='d-flex'>
-                 <Form.Control type='search' placeholder='Search Product' onChange={getData}>
+                 <Form.Control type='search' placeholder='Search Product'>
 
                  </Form.Control>
-                 <Button variant='primary' onClick={()=>getProducts()}><i className='bi bi-search'></i></Button>
+                 <Button variant='primary' ><i className='bi bi-search'></i></Button>
               </Form>
             </Navbar.Collapse>
           </Container>

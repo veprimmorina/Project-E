@@ -19,3 +19,9 @@
 .navbar-nav{
     margin-left: 260px;
 }
+#root{
+    background-color: rgb(238, 238, 238);
+}
+.product-title{
+    font-family: Montserrat,sans-serif;
+}
