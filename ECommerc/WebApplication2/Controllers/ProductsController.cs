@@ -15,6 +15,7 @@ using WebApplication2;
 using WebApplication2.Models;
 using SmtpClient = System.Net.Mail.SmtpClient;
 
+
 namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
@@ -34,6 +35,13 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult<IEnumerable<Product>>> Getproducts()
         {
             return  await _context.products.OrderByDescending(x=> x.Id).Take(6).ToListAsync();
+        }
+
+        [HttpGet("all")]
+
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        {
+            return await _context.products.ToListAsync();
         }
         [HttpGet("get/{search}")]
 
@@ -68,7 +76,17 @@ namespace WebApplication2.Controllers
             
            
         }
-       
+        [HttpGet("clicked/{id}")]
+
+        public  void setClicked(int id)
+        {
+            var product =  _context.products.Find(id);
+            product.clicked = product.clicked + 1;
+            _context.Update(product);
+            _context.SaveChanges();
+           
+
+        }
         
         [HttpPost("generate/pdf")]
         public IActionResult PDF()

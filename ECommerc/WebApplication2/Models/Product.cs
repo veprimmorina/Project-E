@@ -21,6 +21,8 @@ namespace WebApplication2.Models
         public int amount { get; set; }
         public int sold { get; set; }
 
+        public int clicked { get; set; }
+
     }
 
 

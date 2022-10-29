@@ -4,6 +4,8 @@ import HomePage from "./components/HomePage";
 import ProductId from "./components/ProductId";
 import AmazonVeganProducts from './components/amazonVeganProducts'
 import Success from "./components/Success";
+import SideBar from "./components/SideBar";
+import Dashboard from "./components/Dashboard";
 
 
 const App = () => {
@@ -19,8 +21,10 @@ const App = () => {
       <Route path="/product" element={<ProductId />}></Route>
       <Route path="/products/:id" element={<ProductId />}></Route>
       <Route path="/vegan/products" element={<AmazonVeganProducts />}></Route>
+      <Route path="/dashboard" element={<Dashboard />}></Route>
     </Routes>
    </BrowserRouter>
+   
     </>
   );
 };

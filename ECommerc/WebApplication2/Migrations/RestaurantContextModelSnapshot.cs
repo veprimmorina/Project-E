@@ -116,6 +116,9 @@ namespace WebApplication2.Migrations
                     b.Property<int>("amount")
                         .HasColumnType("int");
 
+                    b.Property<int>("clicked")
+                        .HasColumnType("int");
+
                     b.Property<int>("sold")
                         .HasColumnType("int");
 

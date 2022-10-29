@@ -535,3 +535,5 @@ C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Mai
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\MimeKit.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\itextsharp.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
