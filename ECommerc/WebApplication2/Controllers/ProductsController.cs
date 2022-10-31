@@ -36,7 +36,11 @@ namespace WebApplication2.Controllers
         {
             return  await _context.products.OrderByDescending(x=> x.Id).Take(6).ToListAsync();
         }
-
+        [HttpGet("clicked")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetMostClckedProducts()
+        {
+            return await _context.products.OrderByDescending(x => x.clicked).ToListAsync();
+        }
         [HttpGet("all")]
 
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
@@ -75,6 +79,14 @@ namespace WebApplication2.Controllers
            return await _context.products.OrderByDescending(x => x.sold).Take(5).ToListAsync();
             
            
+        }
+
+        [HttpGet("all/top/products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllTopProducts()
+        {
+            return await _context.products.OrderByDescending(x => x.sold).ToListAsync();
+
+
         }
         [HttpGet("clicked/{id}")]
 
@@ -196,6 +208,7 @@ namespace WebApplication2.Controllers
             return pr;
         }
         */
+        [HttpPost]
         public async Task<ActionResult<Product>> Post(Product product)
         {
             _context.products.Add(product);

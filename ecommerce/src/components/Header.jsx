@@ -6,7 +6,7 @@ function Header() {
 
   
     return (
-        <Navbar expand="lg"  className='header'>
+        <Navbar expand="lg"  className='header' style={{background: "#e5e7eb"}}>
           <Container>
             <Navbar.Brand href="#home"><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Nugget_Markets_logo.svg/2560px-Nugget_Markets_logo.svg.png' width="75" height="50" className='d-inline-block align-top'/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -26,12 +26,9 @@ function Header() {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <Form className='d-flex'>
-                 <Form.Control type='search' placeholder='Search Product'>
-
-                 </Form.Control>
-                 <Button variant='primary' ><i className='bi bi-search'></i></Button>
-              </Form>
+              
+              <i className="bi bi-person-circle h3 mr-3"></i>User
+            
             </Navbar.Collapse>
           </Container>
         </Navbar>
