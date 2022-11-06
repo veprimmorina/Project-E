@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities;
 using WebApplication2;
 using WebApplication2.Models;
+using static iTextSharp.text.pdf.AcroFields;
 using SmtpClient = System.Net.Mail.SmtpClient;
 
 
@@ -34,7 +35,10 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Getproducts()
         {
-            return  await _context.products.OrderByDescending(x=> x.Id).Take(6).ToListAsync();
+            var firstProducts = await _context.products.Where(x => x.Category.Equals("Vegan")).Take(3).ToListAsync();
+            var secondProducts = await _context.products.Where(x => x.Category.Equals("Diary Products")).Take(3).ToListAsync();
+            var thirdProducts = await _context.products.Where(x => x.Category.Equals("Kids")).Take(3).ToListAsync();
+            return  await _context.products.OrderByDescending(x=> x.Id).Take(9).ToListAsync();
         }
         [HttpGet("clicked")]
         public async Task<ActionResult<IEnumerable<Product>>> GetMostClckedProducts()
@@ -252,20 +256,29 @@ namespace WebApplication2.Controllers
                 pAmount = pAmount + " "+ prod[i].amount;
                 pTotalPrice = firstProduct.amount * firstProduct.Price;
                 pTotal =pTotal+" "+ Convert.ToString(pTotalPrice);
-                totalMessage = totalMessage + "<tr><td>"+ firstProduct.Name+"</td>"+"<td>"+firstProduct.Price+"</td><td>"+firstProduct.amount+"</td><td>"+firstProduct.Price*firstProduct.amount+"</td></tr>";
+                totalMessage = totalMessage + "<tr><td>"+ firstProduct.Name+"</td>"+"<td>"+Math.Round((firstProduct.Price-((firstProduct.discount*firstProduct.Price/100))),2)+"</td><td>"+firstProduct.amount+"</td><td>"+ Math.Round(((firstProduct.Price - (firstProduct.discount * firstProduct.Price / 100)) * firstProduct.amount),2) + "</td></tr>";
             }
-
+            Fatura invoice = new Fatura();
+            DateTime date=DateTime.Now;
+            string finalDate=date.ToString("yyyy-MM-dd");
+            string finalTime = date.ToString("hh:mm:ss");
+            invoice.customerName = name + " " + surname;
+            invoice.customerEmail = email;
+            invoice.date=finalDate;
+            invoice.time=finalTime;
+            _context.Add(invoice);
+            _context.SaveChanges();
             string photoPath = "https://img.freepik.com/premium-vector/street-market-business-company-logo_23-2148462526.jpg?w=2000";
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("veprimm1@gmail.com");
-                mailMessage.To.Add(email);
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("veprimm1@gmail.com");
+            mailMessage.To.Add(email);
                 mailMessage.Subject = "Order Confirmation";
-                mailMessage.Body = "<img src="+ photoPath+"/>" +
+                mailMessage.Body = 
                     "Dear " + name + " " + surname + ", <br> By this email we are confirming your order <br>" +
                     "<table><tr><td> Product Name</td> <td> Product Price </td> <td> Product Quantity</td><td>Total Product Price</td></tr> " +
                     totalMessage +
-                    "<tr><td></td><td></td><td></td><td>Total Price: </td><td>"+totalPrice+ " € </td></tr></table>" +
-                    "<br>Adress: " + adress + photoPath+ 
+                    "<tr><td></td><td></td><td>Total Price: </td><td>"+totalPrice+ " € </td></tr></table>" +
+                    "<br>Adress: " + adress + 
                     "  <br>Thanks for choosing us <h1>Market BM </h1>";
                 mailMessage.IsBodyHtml = true;
 

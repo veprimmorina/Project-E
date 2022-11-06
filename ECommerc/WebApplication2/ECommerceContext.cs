@@ -19,6 +19,8 @@ namespace WebApplication2
 
         public DbSet<Invoice> invoices { get; set; }
 
+        public DbSet<Fatura> invoice { get; set; }
+        public DbSet<Contacs> contacts { get; set; }
         internal Task FindAsync(int productId)
         {
             throw new NotImplementedException();

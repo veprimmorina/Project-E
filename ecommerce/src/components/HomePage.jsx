@@ -5,7 +5,7 @@ import Productss from './Productss'
 import Slider from './Slider'
 import Card from 'react-bootstrap/Card';
 import ShoppingCart from './ShoppingCart'
-import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Button, Carousel, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Amazon from './amazon'
 import Cart from './cart'
 import Banners from './Banners'
@@ -72,7 +72,7 @@ function HomePage() {
               <Nav className="me-auto">
                 
                 <Nav.Link>Home</Nav.Link>
-              
+                <Link to={"/about/us"}>About us</Link>
                 <Nav.Link href="#link">Link</Nav.Link>
                 <NavDropdown title="Products" id="basic-nav-dropdown">
                   <Link to={'/vegan/products'}>
@@ -104,6 +104,14 @@ function HomePage() {
    </div>
    <div className='col mt-5'>
         <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
+       <Carousel className='mt-4'>
+        <Carousel.Item>
+          <img src='https://marketplace.canva.com/EAFLWg7g6TA/1/0/1131w/canva-blue-modern-fashion-sale-poster-pCRtyeCl2eY.jpg'/>
+        </Carousel.Item>
+        <Carousel.Item>
+        <img src='https://edit.org/photos/img/blog/tvs-sales-promotion-template-free-edit.jpg-840.jpg'/>
+        </Carousel.Item>
+       </Carousel>
     </div>
    </div>
    <div>

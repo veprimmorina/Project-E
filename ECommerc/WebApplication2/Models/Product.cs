@@ -18,9 +18,11 @@ namespace WebApplication2.Models
         [Column(TypeName = "nvarchar(100)")]
         public string PhotoPath { get; set; }
 
+        public string MadeInPhoto { get; set; }
         public int amount { get; set; }
         public int sold { get; set; }
 
+        public double discount { get; set; }
         public int clicked { get; set; }
 
     }

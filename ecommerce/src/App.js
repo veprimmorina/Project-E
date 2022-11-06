@@ -6,6 +6,7 @@ import AmazonVeganProducts from './components/amazonVeganProducts'
 import Success from "./components/Success";
 import SideBar from "./components/SideBar";
 import Dashboard from "./components/Dashboard";
+import AboutUs from "./components/AboutUs";
 
 
 const App = () => {
@@ -22,9 +23,9 @@ const App = () => {
       <Route path="/products/:id" element={<ProductId />}></Route>
       <Route path="/vegan/products" element={<AmazonVeganProducts />}></Route>
       <Route path="/dashboard" element={<Dashboard />}></Route>
+      <Route path="/about/us" element={<AboutUs />}></Route>
     </Routes>
    </BrowserRouter>
-   
     </>
   );
 };

@@ -16,6 +16,8 @@ namespace WebApplication2.Models
 
         public ICollection<Product> Products { get; set; }
 
+        public List<Product> Productet { get; set; }
+
 
     }
 }

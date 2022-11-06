@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cards = ({ item, handleClick }) => {
-  const { id, name, quantity, price, photoPath, category,clicked } = item;
+  const { id, name, quantity, price, photoPath, category,clicked, madeInPhoto, discount } = item;
 
   function addClicked(id){
     alert(id)
@@ -21,22 +21,21 @@ const Cards = ({ item, handleClick }) => {
       <div className="card shadow">
         <div className="d-flex justify-content-between p-3 sold">
           <p className="lead mb-0">{category}</p> 
-            <img classname="avatar rounded-circle img-fluid"  src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
+            <img classname="avatar rounded-circle img-fluid"  src={madeInPhoto}  style={{width: "40px", height: "25px"}} />
         </div>
         
         <img src={photoPath}
-          className="card-img-top sold" alt="Laptop" />
+          className="card-img-top sold" alt="product" />
           <b className="text-danger border border-danger rounded text-center bold">SOLD</b>
          
         <div className="card-body sold">
           <div className="d-flex justify-content-between">
-            <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
-            <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
-          </div>
-          <div className="d-flex justify-content-between mb-3">
             <h5 className="mb-0">{name}</h5>
-            <h5 className="text-danger mb-0">{price} €</h5>
-           
+          </div>
+          <div className="d-flex justify-content-between mb-3 mt-4">
+          <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
+         {discount!=0 ?  <h5 className="text-danger mb-0">{price} €</h5> : ""}
+            <h5 className="text-danger mb-0">{discount!=0?price-(discount*price/100).toFixed(2) : price} €</h5>
           </div>
           <div className="d-flex justify-content-center">
           </div>
@@ -48,7 +47,7 @@ const Cards = ({ item, handleClick }) => {
       <div className="card shadow">
         <div className="d-flex justify-content-between p-3" >
           <p className="lead mb-0">{category}</p> 
-            <img classname="avatar rounded-circle img-fluid" src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
+            <img classname="avatar rounded-circle img-fluid" src={madeInPhoto} style={{width: "40px", height: "25px"}} />
         </div>
         <Link to={'/products/'+id} target="_blank">
         <img src={photoPath} onClick={()=> addClicked(id)}
@@ -56,12 +55,13 @@ const Cards = ({ item, handleClick }) => {
           </Link>
         <div className="card-body">
           <div className="d-flex justify-content-between">
-            <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
-            <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
+          <h5 className="mb-0">{name}</h5>
+        
           </div>
-          <div className="d-flex justify-content-between mb-3">
-            <h5 className="mb-0">{name}</h5>
-            <h5 className="text-danger mb-0">{price} €</h5>
+          <div className="d-flex justify-content-between mb-3 mt-4">
+          <p className="text-muted mb-0">Available: <span className="fw-bold">{quantity}</span></p>
+          {discount!=0 ?  <h5 className="text-danger mb-0" style={{textDecoration:"line-through"}}>{price} €</h5> : ""}
+            <h5 className="text-danger mb-0">{discount!=0?(price-(discount*price/100)).toFixed(2) : price} €</h5>
            
           </div>
           <div className="d-flex justify-content-center">

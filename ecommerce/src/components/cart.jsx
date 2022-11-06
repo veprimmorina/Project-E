@@ -39,7 +39,8 @@ const Cart = ({ cart, setCart, handleChange }) => {
   };
   const handlePrice = () => {
     let ans = 0;
-    cart.map((item) => (ans += item.amount * item.price));
+    cart.map((item) => (ans += (item.price -(item.discount*item.price/100)).toFixed(2)* item.amount).toFixed(2));
+    //((item.price-(item.discount*item.price/100).toFixed(1))*item.amount).toFixed(2)
     setPrice(ans);
   };
  
@@ -125,13 +126,14 @@ const Cart = ({ cart, setCart, handleChange }) => {
           <td className="clickable" onClick={() => handleRemove(item.id)}>x</td>
         <td><img src={item.photoPath} className='img-fluid' alt='product' width="45px" heigth="40px"/> </td>
        <td>{item.name}</td>
-       <td>{item.price+" €"}</td>
+       <td>{item.discount!=0 ? (item.price-(item.discount*item.price/100)).toFixed(2)+" €": item.price}</td>
+      
        <td> <span className='quantity'>
                 <button ><i class="bi bi-dash-circle " onClick={() => {handleChange(item, -1); setError();}} ></i></button>
                <input id="quantity" min="1" type="number" max="1" value={item.amount} className='text-center'  />
                <button><i class="bi bi-plus-circle" onClick={() => {handleChange(item, 1); validateQuantity(item,item.amount,item.quantity)}}></i></button>
                </span></td>
-      <td>{(item.price*item.amount).toFixed(2)}€</td>
+      <td>{((item.price-(item.discount*item.price/100))*item.amount).toFixed(2)}€</td>
        </tr>
              
 

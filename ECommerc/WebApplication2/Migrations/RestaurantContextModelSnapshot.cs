@@ -17,10 +17,46 @@ namespace WebApplication2.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("WebApplication2.Models.Contacs", b =>
+                {
+                    b.Property<int>("contactsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("contactsId"), 1L, 1);
+
+                    b.Property<string>("comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isChecked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("contactsId");
+
+                    b.ToTable("contacts");
+                });
 
             modelBuilder.Entity("WebApplication2.Models.Customer", b =>
                 {
@@ -64,6 +100,35 @@ namespace WebApplication2.Migrations
                     b.ToTable("customers");
                 });
 
+            modelBuilder.Entity("WebApplication2.Models.Fatura", b =>
+                {
+                    b.Property<int>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"), 1L, 1);
+
+                    b.Property<string>("customerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("customerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InvoiceId");
+
+                    b.ToTable("invoice");
+                });
+
             modelBuilder.Entity("WebApplication2.Models.Invoice", b =>
                 {
                     b.Property<int>("Id")
@@ -95,8 +160,18 @@ namespace WebApplication2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FaturaInvoiceId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
+
+                    b.Property<int?>("InvoiceId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MadeInPhoto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -119,12 +194,19 @@ namespace WebApplication2.Migrations
                     b.Property<int>("clicked")
                         .HasColumnType("int");
 
+                    b.Property<double>("discount")
+                        .HasColumnType("float");
+
                     b.Property<int>("sold")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FaturaInvoiceId");
+
                     b.HasIndex("InvoiceId");
+
+                    b.HasIndex("InvoiceId1");
 
                     b.ToTable("products");
                 });
@@ -149,9 +231,17 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.Models.Product", b =>
                 {
+                    b.HasOne("WebApplication2.Models.Fatura", null)
+                        .WithMany("Products")
+                        .HasForeignKey("FaturaInvoiceId");
+
+                    b.HasOne("WebApplication2.Models.Invoice", null)
+                        .WithMany("Productet")
+                        .HasForeignKey("InvoiceId");
+
                     b.HasOne("WebApplication2.Models.Invoice", null)
                         .WithMany("Products")
-                        .HasForeignKey("InvoiceId");
+                        .HasForeignKey("InvoiceId1");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Customer", b =>
@@ -159,8 +249,15 @@ namespace WebApplication2.Migrations
                     b.Navigation("Customers");
                 });
 
+            modelBuilder.Entity("WebApplication2.Models.Fatura", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("WebApplication2.Models.Invoice", b =>
                 {
+                    b.Navigation("Productet");
+
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

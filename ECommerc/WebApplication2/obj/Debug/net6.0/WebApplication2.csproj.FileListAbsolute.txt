@@ -537,3 +537,4 @@ C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Bou
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\itextsharp.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll

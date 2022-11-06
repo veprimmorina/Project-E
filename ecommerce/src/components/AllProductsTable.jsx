@@ -11,6 +11,8 @@ function AllProductsTable() {
   const [category, setCategory] = useState();
   const [quantity, setQuantity] = useState();
   const [price, setPrice] = useState();
+  const [madeIn, setMadeIn]=useState();
+  const [discount, setDiscount]=useState();
     const [products, setProducts] = useState([]);
     const [searched, setSearched] = useState([]);
     const [hasSearch, setHasSearch]= useState(false);
@@ -49,6 +51,12 @@ function AllProductsTable() {
     function gQuantity(val){
       setQuantity(val.target.value);
     }
+    function gMadeIn(val){
+      setMadeIn(val.target.value);
+    }
+    function gDiscount(val){
+      setDiscount(val.target.value);
+    }
     function getPrice(val){
       setPrice(val.target.value);
     }
@@ -65,7 +73,9 @@ function AllProductsTable() {
         price: price,
         amount: 1,
         clicked: 0,
-        sold: 0
+        sold: 0,
+        madeInPhoto: madeIn,
+        discount: discount
       }
       axios.post('https://localhost:7103/api/Products',Product).then(response=>{
         console.log(response.data);
@@ -93,11 +103,26 @@ function AllProductsTable() {
       */
     }
 
+    function gPhotoPath(val){
+      productData.photoPath=val.target.value;
+    }
+    function gCategory(val){
+      productData.category=val.target.value;
+    }
+    function gPrice(val){
+      productData.price=val.target.value;
+    }
     function getQuantity(val){
       productData.quantity=val.target.value;
     }
+    function getMadeIn(val){
+      productData.madeInPhoto=val.target.value;
+    }
+    function getDiscount(val){
+      productData.discount=val.target.value;
+    }
     function saveProduct(id){
-    
+      setShowM(false);
     var Product = {
         id: productData.id,
         photoPath: productData.photoPath,
@@ -105,11 +130,14 @@ function AllProductsTable() {
         category: productData.category,
         quantity: productData.quantity,
         amount : 1,
-        price: productData.price
+        price: productData.price,
+        madeInPhoto: productData.madeInPhoto,
+        discount: productData.discount
       }
-      axios.put('https://localhost:7103/api/Products/'+id, Product).then(response=>{
-      console.log(response.data);
-     }) 
+      axios.put('https://localhost:7103/api/Products/'+productData.id, Product).then(response=>{
+        console.log(response.data)
+      })
+     alert('Succesfully edited')
     }
     function deleteProduct(id){
       axios.delete('https://localhost:7103/api/Products/'+id).then(response=>{
@@ -136,8 +164,8 @@ function AllProductsTable() {
       <th>Category</th>
       <th>Quantity</th>
       <th>Price</th>
-      <th></th>
-      <th></th>
+      <th>Made In</th>
+      <th>Discount</th>
       </tr>
     </thead>
     <tbody>
@@ -152,6 +180,8 @@ function AllProductsTable() {
             <td>{product.category}</td>
             <td>{product.quantity}</td>
             <td>{product.price}</td>
+            <td><img src={product.madeInPhoto} width="50px" className='mr-auto ml-auto'/></td>
+            <td>{product.discount+" %"}</td>
             <td><Button onClick={()=>handleShow(product.id)}><i className='bi bi-pen'></i></Button></td>
             <td><Button variant='danger' onClick={()=> deleteProduct(product.id)}><i className='bi bi-trash'></i></Button></td>
             </tr>
@@ -167,8 +197,10 @@ function AllProductsTable() {
     <td><input type='text' placeholder='Photo Path' onChange={getPhotoPath}/></td>
     <td><input type='text' placeholder='Name' onChange={getName}/></td>
     <td><input type='text' placeholder='Category' onChange={getCategory} /></td>
-    <td><input type='text' placeholder='Quantity' onChange={gQuantity}/></td>
-    <td><input type='text' placeholder='Price' onChange={getPrice}/></td>
+    <td><input type='text' placeholder='Quantity' size='3'onChange={gQuantity}/></td>
+    <td><input type='text' placeholder='Price' size='3' onChange={getPrice}/></td>
+    <td><input type='text' placeholder='Made In' onChange={gMadeIn}/></td>
+    <td><input type='text' placeholder='Discount' onChange={gDiscount}/></td>
     <td><Button variant='success' onClick={()=> addNewProduct()}>Add</Button></td>
   </tr>
 }
@@ -183,17 +215,21 @@ function AllProductsTable() {
    <Form>
 
     <Form.Label>Photo Path:</Form.Label>
-    <Form.Control type="text" value={productData!=null ? productData.photoPath : "N/A"}></Form.Control>
+    <Form.Control type="text" value={productData!=null ? productData.photoPath : "N/A"} onChange={gPhotoPath}></Form.Control>
     <Form.Label>Id:</Form.Label>
     <Form.Control type="text" value={productData!=null ? productData.id : "N/A"} disabled='disabled'></Form.Control>
     <Form.Label>Name:</Form.Label>
     <Form.Control type="text"  value={productData!=null ? productData.name : "N/A"} onChange={getData}></Form.Control>
     <Form.Label>Category</Form.Label>
-    <Form.Control type="text" value={productData!=null ? productData.category : "N/A"}></Form.Control>
+    <Form.Control type="text" value={productData!=null ? productData.category : "N/A" } onChange={gCategory}></Form.Control>
     <Form.Label>Quantity:</Form.Label>
     <Form.Control type="text" value={productData!=null ? productData.quantity : "N/A"} onChange={getQuantity}></Form.Control>
     <Form.Label>Price: </Form.Label>
-    <Form.Control type='text' value={productData!=null ? productData.price : "N/A"}></Form.Control>
+    <Form.Control type='text' value={productData!=null ? productData.price : "N/A"} onChange={gPrice}></Form.Control>
+    <Form.Label>Made In: </Form.Label>
+    <Form.Control type='text' value={productData!=null ? productData.madeInPhoto : "N/A"} onChange={getMadeIn}></Form.Control>
+    <Form.Label>Discount: </Form.Label>
+    <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={getDiscount}></Form.Control>
    </Form>
   </Modal.Body>
   <Modal.Footer>
