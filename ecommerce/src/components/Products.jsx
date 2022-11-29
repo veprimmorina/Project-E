@@ -19,7 +19,7 @@ const Products = ({ item, handleClick})=> {
         <div className="card">
           <div className="d-flex justify-content-between p-3">
             <p className="lead mb-0">Vegan Products</p> 
-              <img classname="avatar rounded-circle img-fluid" src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
+              <img className="avatar rounded-circle img-fluid" src='https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png'  style={{width: "40px", height: "25px"}} />
           </div>
           <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
             className="card-img-top" alt="Laptop" />
@@ -37,9 +37,9 @@ const Products = ({ item, handleClick})=> {
              <div className='border border-dark'>
               <div className="ms-auto mt-2">
               <span className='quantity'>
-                <button><i class="bi bi-dash-circle mr-2"></i></button>
+                <button><i className="bi bi-dash-circle mr-2"></i></button>
                <input id="quantity" min="1" type="number" value="1" max="1" className='text-center' />
-               <button><i class="bi bi-plus-circle"></i></button>
+               <button><i className="bi bi-plus-circle"></i></button>
                </span>
               </div>
               
@@ -71,9 +71,9 @@ const Products = ({ item, handleClick})=> {
              <div className='border border-dark'>
               <div className="ms-auto ">
               <span className='quantity'>
-                <button><i class="bi bi-dash-circle mr-2" onClick={()=> minusProduct()}></i></button>
+                <button><i className="bi bi-dash-circle mr-2" onClick={()=> minusProduct()}></i></button>
                <input id="quantity" min="1" type="number" value={productQuantity}  max="1" className='text-center' />
-               <button><i class="bi bi-plus-circle" onClick={()=>setQuantity(productQuantity+1)}></i></button>
+               <button><i className="bi bi-plus-circle" onClick={()=>setQuantity(productQuantity+1)}></i></button>
                </span>
               </div>
               </div>
@@ -103,9 +103,9 @@ const Products = ({ item, handleClick})=> {
              <div className='border border-dark'>
               <div className="ms-auto ">
               <span className='quantity'>
-                <button><i class="bi bi-dash-circle mr-2"></i></button>
+                <button><i className="bi bi-dash-circle mr-2"></i></button>
                <input id="quantity" min="1" type="number" value="1" max="1" className='text-center' />
-               <button><i class="bi bi-plus-circle"></i></button>
+               <button><i className="bi bi-plus-circle"></i></button>
                </span>
               </div>
               </div>

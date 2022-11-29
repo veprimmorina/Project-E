@@ -11,9 +11,7 @@ function Slider() {
           src="https://management.begmart.com/wp-content/uploads/2022/10/Tetori_per_Gruan.jpg"
           alt="First slide"
         />
-        <Carousel.Caption>
-            <h5>Hello</h5>
-        </Carousel.Caption>
+      
         </Carousel.Item>
         <Carousel.Item>
             <img src="https://management.begmart.com/wp-content/uploads/2022/05/Web_Fitomejogobella.jpg" alt="" />

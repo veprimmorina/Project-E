@@ -13,6 +13,8 @@ function AllProductsTable() {
   const [price, setPrice] = useState();
   const [madeIn, setMadeIn]=useState();
   const [discount, setDiscount]=useState();
+  const [ingredients, setIngredients] = useState();
+  const [barcode, setBarCode]= useState();
     const [products, setProducts] = useState([]);
     const [searched, setSearched] = useState([]);
     const [hasSearch, setHasSearch]= useState(false);
@@ -63,6 +65,15 @@ function AllProductsTable() {
     function productAdd(){
       setAddProduct(!addProduct);
     }
+    function getIngredients(val){
+      setIngredients(val.target.value)
+    }
+    function getBarCode(val){
+      setBarCode(val.target.value)
+    }
+    function getDiscount(val){
+      setIngredients(val.target.value)
+    }
 
     function addNewProduct(){
       var Product = {
@@ -75,7 +86,9 @@ function AllProductsTable() {
         clicked: 0,
         sold: 0,
         madeInPhoto: madeIn,
-        discount: discount
+        discount: discount,
+        ingredients: ingredients,
+        barcode: barcode,
       }
       axios.post('https://localhost:7103/api/Products',Product).then(response=>{
         console.log(response.data);
@@ -84,7 +97,9 @@ function AllProductsTable() {
        setCategory('')
        setPhotoPath('');
        setPrice('');
-       setQuantity('')
+       setQuantity('');
+       setBarCode('');
+       setIngredients('');
        setAddProduct(false);
     }
     function getSearch(val){
@@ -121,6 +136,12 @@ function AllProductsTable() {
     function getDiscount(val){
       productData.discount=val.target.value;
     }
+    function gIngredients(val){
+      productData.ingredients=val.target.value;
+    }
+    function gBarCode(val){
+      productData.barcode=val.target.value;
+    }
     function saveProduct(id){
       setShowM(false);
     var Product = {
@@ -132,7 +153,9 @@ function AllProductsTable() {
         amount : 1,
         price: productData.price,
         madeInPhoto: productData.madeInPhoto,
-        discount: productData.discount
+        discount: productData.discount,
+        ingredients: ingredients,
+        barcode: barcode
       }
       axios.put('https://localhost:7103/api/Products/'+productData.id, Product).then(response=>{
         console.log(response.data)
@@ -196,11 +219,13 @@ function AllProductsTable() {
     <td></td>
     <td><input type='text' placeholder='Photo Path' onChange={getPhotoPath}/></td>
     <td><input type='text' placeholder='Name' onChange={getName}/></td>
-    <td><input type='text' placeholder='Category' onChange={getCategory} /></td>
+    <td><input type='text' placeholder='Category' size='5' onChange={getCategory} /></td>
     <td><input type='text' placeholder='Quantity' size='3'onChange={gQuantity}/></td>
     <td><input type='text' placeholder='Price' size='3' onChange={getPrice}/></td>
     <td><input type='text' placeholder='Made In' onChange={gMadeIn}/></td>
-    <td><input type='text' placeholder='Discount' onChange={gDiscount}/></td>
+    <td><input type='text' placeholder='Discount' size='3' onChange={gDiscount}/></td>
+    <td><input type='text' placeholder='Ingredients' onChange={getIngredients}/></td>
+    <td><input type='text' placeholder='Bar Code' size='8' onChange={getBarCode}/></td>
     <td><Button variant='success' onClick={()=> addNewProduct()}>Add</Button></td>
   </tr>
 }
@@ -230,6 +255,10 @@ function AllProductsTable() {
     <Form.Control type='text' value={productData!=null ? productData.madeInPhoto : "N/A"} onChange={getMadeIn}></Form.Control>
     <Form.Label>Discount: </Form.Label>
     <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={getDiscount}></Form.Control>
+    <Form.Label>Ingredients: </Form.Label>
+    <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={gIngredients}></Form.Control>
+    <Form.Label>Barcode: </Form.Label>
+    <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={gBarCode}></Form.Control>
    </Form>
   </Modal.Body>
   <Modal.Footer>

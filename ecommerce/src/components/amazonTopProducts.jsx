@@ -34,9 +34,9 @@ const AmazonTopProducts = ({ handleClick }) => {
       ))}
      
       </div>
-      <button className="left" onClick={handleRightClick}><h1><i class="bi bi-chevron-left bg-light"></i></h1>
+      <button className="left" onClick={handleRightClick}><h1><i className="bi bi-chevron-left bg-light"></i></h1>
 </button>
-          <button className="right" onClick={handleLeftClick}><h1><i class="bi bi-chevron-right bg-light"></i></h1>
+          <button className="right" onClick={handleLeftClick}><h1><i className="bi bi-chevron-right bg-light"></i></h1>
 </button>
       </div>
       

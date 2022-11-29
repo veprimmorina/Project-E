@@ -25,6 +25,11 @@ namespace WebApplication2.Models
         public double discount { get; set; }
         public int clicked { get; set; }
 
+        public string ingredients { get; set; }
+
+        public string barcode { get; set; }
+
+
     }
 
 

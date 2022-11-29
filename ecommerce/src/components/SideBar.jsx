@@ -12,14 +12,14 @@ function SideBar() {
     <Sidebar>
   <Menu>
     <SubMenu label="Products"> 
-      <MenuItem> <i class="bi bi-cart-fill mr-2" onClick={()=> getAll()}></i>All Products </MenuItem>
-      <MenuItem><i class="bi bi-award-fill"></i> Best solded products </MenuItem>
-      <MenuItem><i class="bi bi-arrow-up-square-fill mr-2"></i>Newest products</MenuItem>
-      <MenuItem><i class="bi bi-hand-index-fill mr-2"></i>Most clicked products</MenuItem>
+      <MenuItem> <i className="bi bi-cart-fill mr-2" onClick={()=> getAll()}></i>All Products </MenuItem>
+      <MenuItem><i className="bi bi-award-fill"></i> Best solded products </MenuItem>
+      <MenuItem><i className="bi bi-arrow-up-square-fill mr-2"></i>Newest products</MenuItem>
+      <MenuItem><i className="bi bi-hand-index-fill mr-2"></i>Most clicked products</MenuItem>
     </SubMenu>
-    <MenuItem> <i class="bi bi-activity mr-3"></i> Stats </MenuItem>
-    <MenuItem> <i class="bi bi-person-fill mr-3"></i>Users </MenuItem>
-    <MenuItem><i class="bi bi-person-heart mr-3"></i>Best customers</MenuItem>
+    <MenuItem> <i className="bi bi-activity mr-3"></i> Stats </MenuItem>
+    <MenuItem> <i className="bi bi-person-fill mr-3"></i>Users </MenuItem>
+    <MenuItem><i className="bi bi-person-heart mr-3"></i>Best customers</MenuItem>
   </Menu>
 </Sidebar>
   )

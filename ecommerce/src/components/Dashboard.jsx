@@ -11,11 +11,17 @@ import NewestProductTable from './NewestProductTable';
 import {CanvasJSChart} from 'canvasjs-react-charts'
 import InvoicesTable from './InvoicesTable';
 import ContactsTable from './ContactsTable';
+import { useParams } from 'react-router-dom';
+import UsersTable from './UsersTable';
+import BestUserTable from './BestUserTable';
+import MainPageDashboard from './MainPageDashboard';
+
 
 
 
 function Dashboard() {
     const [products, setProducts] = useState([]);
+    const [notification, setNotification] = useState();
     const [allProducts, setAllProducts] = useState(false);
     const [mostClickedP, setMostClicked] = useState(false);
     const [bestSoldedP, setBestSolded] = useState(false);
@@ -23,6 +29,10 @@ function Dashboard() {
     const [stats, setStats] = useState(false);
     const [invoices, setInvoices] = useState(false);
     const [contact, setContact] = useState(false);
+    const [users, setUsers] = useState(false);
+    const [bestUsers, setBestUsers] = useState(false);
+    const [stock, setStock] = useState();
+    const {id}= useParams();
 function getAll(){
    setAllProducts(true);
    setMostClicked(false);
@@ -31,6 +41,8 @@ function getAll(){
    setStats(false);
    setInvoices(false);
    setContact(false);
+   setUsers(false);
+   setBestUsers(false);
 }
 
 function mostClicked(){
@@ -41,6 +53,8 @@ function mostClicked(){
   setStats(false);
   setInvoices(false);
   setContact(false);
+  setUsers(false);
+  setBestUsers(false);
 }
 
 function bestSolded(){
@@ -51,6 +65,8 @@ function bestSolded(){
   setStats(false);
   setInvoices(false);
   setContact(false);
+  setUsers(false);
+  setBestUsers(false);
 }
 function newestProduct(){
 setNewestProduct(true);
@@ -60,6 +76,8 @@ setAllProducts(false);
   setStats(false);
   setInvoices(false);
   setContact(false);
+  setUsers(false);
+  setBestUsers(false);
 }
 function showStats(){
   setStats(true);
@@ -69,6 +87,8 @@ setAllProducts(false);
   setBestSolded(false);
   setInvoices(false);
   setContact(false);
+  setUsers(false);
+  setBestUsers(false);
 }
 
 function showInvoices(){
@@ -79,6 +99,8 @@ setAllProducts(false);
   setMostClicked(false);
   setBestSolded(false);
   setContact(false);
+  setUsers(false);
+  setBestUsers(false);
 }
 
 function showContacts(){
@@ -89,16 +111,52 @@ function showContacts(){
 setAllProducts(false);
   setMostClicked(false);
   setBestSolded(false);
+  setUsers(false);
+  setBestUsers(false);
+}
+function doSomething(){
+
+}
+function showUsers(){
+  setUsers(true);
+  setContact(false);
+  setInvoices(false);
+  setStats(false);
+  setNewestProduct(false);
+setAllProducts(false);
+  setMostClicked(false);
+  setBestSolded(false);
+  setBestUsers(false);
+}
+function showBestUsers(){
+  setBestUsers(true);
+  setUsers(false);
+  setContact(false);
+  setInvoices(false);
+  setStats(false);
+  setNewestProduct(false);
+setAllProducts(false);
+  setMostClicked(false);
+  setBestSolded(false);
+}
+function logOut(){
+  localStorage.setItem(9,"")
+  window.location.href="http://localhost:3000/";
 }
 useEffect(()=>{
-  
-  
+  axios.get('https://localhost:7103/api/Contacs/unchecked').then(response=>{
+    setNotification(response.data);
+    axios.get('https://localhost:7103/api/Invoices').then(response=>{
+      setStock(response.data);
+     })    
+  });
+  id!=undefined ? setContact(true) : doSomething()
 })
 const options = {
   exportEnabled: true,
   animationEnabled: true,
   title: {
-    text: "Website Traffic Sources"
+    text: "Products in stock"
   },
   data: [{
     type: "pie",
@@ -109,18 +167,18 @@ const options = {
     indexLabelFontSize: 16,
     indexLabel: "{label} - {y}%",
     dataPoints: [
-      { y: 18, label: "Direct" },
-      { y: 49, label: "Organic Search" },
-      { y: 9, label: "Paid Search" },
-      { y: 5, label: "Referral" },
-      { y: 19, label: "Social" }
+      { y: 18, label: "Protein Vegane" },
+      { y: 49, label: "Virshlle vegane" },
+      { y: 9, label: "Qumesht soja" },
+      { y: 5, label: "Zott Monte" },
+      { y: 19, label: "Biskota misri me djath" }
     ]
   }]}
   const options1 = {
     animationEnabled: true,
     theme: "light2",
     title:{
-      text: "Most Popular Social Networking Sites"
+      text: "Products in stock"
     },
     axisX: {
       title: "Social Network",
@@ -134,13 +192,11 @@ const options = {
     data: [{
       type: "bar",
       dataPoints: [
-        { y:  2200000000, label: "Facebook" },
-        { y:  1800000000, label: "YouTube" },
-        { y:  800000000, label: "Instagram" },
-        { y:  563000000, label: "Qzone" },
-        { y:  376000000, label: "Weibo" },
-        { y:  336000000, label: "Twitter" },
-        { y:  330000000, label: "Reddit" }
+        { y:  2200000000, label: "Virshlle Vegane" },
+        { y:  1800000000, label: "Protein Vegane" },
+        { y:  800000000, label: "Qumesht Soja" },
+        { y:  563000000, label: "Biskota me djath" },
+     
       ]
     }]
   }
@@ -161,18 +217,9 @@ const options = {
       xValueFormatString: "MMMM",
       type: "spline",
       dataPoints: [
-        { x: new Date(2017, 0), y: 25060 },
-        { x: new Date(2017, 1), y: 27980 },
-        { x: new Date(2017, 2), y: 42800 },
-        { x: new Date(2017, 3), y: 32400 },
-        { x: new Date(2017, 4), y: 35260 },
-        { x: new Date(2017, 5), y: 33900 },
-        { x: new Date(2017, 6), y: 40000 },
-        { x: new Date(2017, 7), y: 52500 },
-        { x: new Date(2017, 8), y: 32300 },
-        { x: new Date(2017, 9), y: 42000 },
-        { x: new Date(2017, 10), y: 37160 },
-        { x: new Date(2017, 11), y: 38400 }
+        { x: new Date(2022, 10), y: 15 },
+        { x: new Date(2017, 11), y: 46 },
+       
       ]
     }]
   }
@@ -191,21 +238,19 @@ const options = {
       xValueFormatString: "MMM YYYY",
       markerSize: 5,
       dataPoints: [
-        { x: new Date("2017- 01- 01"), y: 1792 },
-        { x: new Date("2017- 02- 20"), y: 1526 },
-        { x: new Date("2017- 03- 11"), y: 1955 },
-        { x: new Date("2017- 04- 05"), y: 1727 },
-        { x: new Date("2017- 05- 04"), y: 1523 },
-        { x: new Date("2017- 06- 21"), y: 1257 },
-        { x: new Date("2017- 07- 05"), y: 1520 },
-        { x: new Date("2017- 08- 03"), y: 1853 },
-        { x: new Date("2017- 09- 11"), y: 1738 },
-        { x: new Date("2017- 10- 03"), y: 1754 }
+        { x: new Date("2022- 09- 20"), y: 0 },
+        { x: new Date("2022- 10- 20"), y: 25 },
+        { x: new Date("2022- 11- 10"), y: 46 },
+        { x: new Date("2022- 12- 10"), y: 52 },        
       ]
     }]
   }
   return (
+    
     <>
+    {
+      localStorage.getItem(9)!="" ? 
+    
     <div className='' style={{height: "800px"}}>
     <div className='d-flex'>
       <div>
@@ -215,23 +260,23 @@ const options = {
     <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Nugget_Markets_logo.svg/2560px-Nugget_Markets_logo.svg.png' alt='logo' width='130px' className='ml-3 pl-3 mt-3'/>
     <SubMenu label="Products" className='mt-5'> 
       <MenuItem onClick={()=> getAll()}> <i className="bi bi-cart-fill mr-2" ></i>All Products </MenuItem>
-      <MenuItem onClick={()=>bestSolded()}><i class="bi bi-award-fill"></i> Best solded products </MenuItem>
-      <MenuItem onClick={()=>newestProduct()}><i class="bi bi-arrow-up-square-fill mr-2"></i>Newest products</MenuItem>
-      <MenuItem onClick={()=> mostClicked()}><i class="bi bi-hand-index-fill mr-2"></i>Most clicked products</MenuItem>
+      <MenuItem onClick={()=>bestSolded()}><i className="bi bi-award-fill"></i> Best solded products </MenuItem>
+      <MenuItem onClick={()=>newestProduct()}><i className="bi bi-arrow-up-square-fill mr-2"></i>Newest products</MenuItem>
+      <MenuItem onClick={()=> mostClicked()}><i className="bi bi-hand-index-fill mr-2"></i>Most clicked products</MenuItem>
     </SubMenu>
-    <MenuItem onClick={()=> showStats()}> <i class="bi bi-activity mr-3"></i> Stats </MenuItem>
-    <MenuItem> <i class="bi bi-person-fill mr-3"></i>Users </MenuItem>
-    <MenuItem><i class="bi bi-person-heart mr-3"></i>Best customers</MenuItem>
-    <MenuItem onClick={()=> showInvoices()}><i class="bi bi-receipt mr-2"></i>Invoices</MenuItem>
-    <MenuItem onClick={()=> showContacts()}><i class="bi bi-receipt mr-2"></i>Contacs</MenuItem>
-    <MenuItem className='text-center mt-5'><Button variant='danger' >Log out</Button></MenuItem>
+    <MenuItem onClick={()=> showStats()}> <i className="bi bi-activity mr-3"></i> Stats </MenuItem>
+    <MenuItem onClick={()=> showUsers()}> <i className="bi bi-person-fill mr-3"></i>Users </MenuItem>
+    <MenuItem onClick={()=> showBestUsers()}><i className="bi bi-person-heart mr-3"></i>Best customers</MenuItem>
+    <MenuItem onClick={()=> showInvoices()}><i className="bi bi-receipt mr-2"></i>Invoices</MenuItem>
+    <MenuItem onClick={()=> showContacts()}><i className="bi bi-envelope mr-2"></i>Contacs</MenuItem>
+    <MenuItem className='text-center mt-5'><Button variant='danger' onClick={()=> logOut()}>Log out</Button></MenuItem>
   </Menu>
 </Sidebar>
     </ProSidebarProvider>
     </div>
     
     <div className='w-100'>
-   <Header />
+   <Header news={notification}/>
    { stats&&
    <>
    <div className='d-flex'>
@@ -244,22 +289,26 @@ const options = {
   </div>
   </>
 }
+<MainPageDashboard />
    { allProducts && <AllProductsTable />}
-    
     { mostClickedP && <MostClickedProductsTable /> }
-
     { bestSoldedP && <BestSoldedTable />}
     {newestP && <NewestProductTable />}
     {invoices && <InvoicesTable />}
-    {contact && <ContactsTable />}
+    {contact && <ContactsTable commentId={id}/>}
+    {users && <UsersTable />}
+    {bestUsers && <BestUserTable />}
    </div>
    </div>
    
   
     </div>
-    
+ : <p>You are not authorize for this part!</p> }
     </>
+    
   )
+
 }
+
 
 export default Dashboard

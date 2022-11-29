@@ -3,19 +3,24 @@ import { Button, Card, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import $ from 'jquery'
 import { Link } from "react-router-dom";
+import { MDBInput } from "mdb-react-ui-kit";
 
 
 const Cart = ({ cart, setCart, handleChange }) => {
   const [price, setPrice] = useState(0);
+  const [stripeId, setStripeId] = useState();
   const [product,setProduct]=useState(4);
   const [showM, setShowM] = useState(false);
   const [errorMessage, setErrorMessage]=useState('');
+  const [paymentError, setPaymentError]=useState('');
   const [email, setEmail]=useState();
   const [name, setName]= useState();
   const [surname, setSurname]= useState();
   const [address, setAdress]= useState();
   const handleClose = () => setShowM(false);
   const handleShow = () => setShowM(true);
+  const [showOrder, setShowOrder] = useState(true);
+  const [showPayment, setShowPayment] = useState(false);
   
   const [data,setData]=useState([]);
 
@@ -27,7 +32,10 @@ const Cart = ({ cart, setCart, handleChange }) => {
       setErrorMessage('')
     }
   }
-
+  function back(){
+    setShowOrder(true);
+    setShowPayment(false);
+  }
   function setError(){
     setErrorMessage('')
   }
@@ -59,28 +67,13 @@ const Cart = ({ cart, setCart, handleChange }) => {
       console.log('success');
     })  
     */
-    axios.post('https://localhost:7103/api/Products/send/'+email+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
-      console.log(response.data);
-      console.log(cart)
-    }) 
+   setShowOrder(false)
+   setShowPayment(true)
+   // axios.post('https://localhost:7103/api/Products/send/'+localStorage.getItem(8)+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
+     // console.log(response.data);
+      //console.log(cart)
+    //}) 
    
-    /*
-    $.ajax({
-      url: "http://localhost:9000/api/reservation/regjistro/produktin",
-      type: "post",
-    contentType: "application/json; charset=utf-8",
-    //dataType: "json",
-    data: JSON.stringify(cart),
-      //data: JSON.stringify(user),
-      success: function (data) {
-          console.log("success")
-      },
-      error: function (request, status, error) {
-          console.log(error);
-          console.log(status);
-      },
-  });
-  */
   }
   function getName(val){
     setName(val.target.value)
@@ -95,7 +88,29 @@ const Cart = ({ cart, setCart, handleChange }) => {
   function getEmail(val){
     setEmail(val.target.value)
   }
-
+  const orderAndPay = () => {
+    var AddStripePayment = {
+      customerId: stripeId,
+      receiptEmail: email,
+      description: "Payment for order",
+      currency: "EUR",
+      amount: (parseInt(price)+1)*100,
+    } 
+    
+    axios.post('https://localhost:7103/api/Stripe/payment/add',AddStripePayment).then(response=>{
+        if(response.data!=""){
+          axios.post('https://localhost:7103/api/Products/send/'+email+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
+      console.log(response.data);
+      console.log(cart)
+    })
+          window.location.href="http://localhost:3000/success/"+email;
+        }
+        console.log(response.data)
+      })
+      .catch(error=>{
+         setPaymentError('Invalid credentials! Please check again')
+      })
+  }
   return (
     
     <article>
@@ -107,10 +122,12 @@ const Cart = ({ cart, setCart, handleChange }) => {
     <p className='text-white mt-3 lead'>Shopping cart</p>
     <p className='text-white mt-3 lead'></p>
     </Card.Title>
-    <Card.Text id="cart-body" className="text-center"style={{height: "600px", overflow: "auto"}}>
+    <div className="text-center card-text" style={{height: "600px", overflow: "auto"}}>
+    <p className="text-center text-danger h5 mt-3 mb-3">{""+errorMessage}</p> 
     <table width="100%">
      {
      price!=0 ?
+     <tbody>
      <tr>
         <th></th>
         <th>Product</th>
@@ -119,38 +136,52 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <th>Quantity</th>
         <th>Total price</th>
       </tr>
-      : <p>0 Products on cart</p>
+      </tbody>
+      : 
+      <tbody>
+      <tr>
+      <td>0 Products on cart</td>
+      </tr>
+      </tbody>
       }
       {cart.map((item) => (
-        <tr className='border shadow-sm' id={item.id}>
-          <td className="clickable" onClick={() => handleRemove(item.id)}>x</td>
+        <tbody>
+        <tr key={item.id} className='border shadow-sm' id={item.id}><td className="clickable " onClick={() => handleRemove(item.id)}><b>x</b></td>
         <td><img src={item.photoPath} className='img-fluid' alt='product' width="45px" heigth="40px"/> </td>
        <td>{item.name}</td>
        <td>{item.discount!=0 ? (item.price-(item.discount*item.price/100)).toFixed(2)+" €": item.price}</td>
       
        <td> <span className='quantity'>
-                <button ><i class="bi bi-dash-circle " onClick={() => {handleChange(item, -1); setError();}} ></i></button>
+                <button ><i className="bi bi-dash-circle " onClick={() => {handleChange(item, -1); setError();}} ></i></button>
                <input id="quantity" min="1" type="number" max="1" value={item.amount} className='text-center'  />
-               <button><i class="bi bi-plus-circle" onClick={() => {handleChange(item, 1); validateQuantity(item,item.amount,item.quantity)}}></i></button>
+               <button><i className="bi bi-plus-circle" onClick={() => {handleChange(item, 1); validateQuantity(item,item.amount,item.quantity)}}></i></button>
                </span></td>
       <td>{((item.price-(item.discount*item.price/100))*item.amount).toFixed(2)}€</td>
        </tr>
-             
+       </tbody>
 
        ))}
       </table>
-      <p className="text-center text-danger h5 mt-3 mb-3">{errorMessage}</p>
-         {price>0 ?<> <span className="">Total price: {price.toFixed(2)} €</span> <Button variant="primary" onClick={handleShow}> <h5>Order</h5>  </Button> </>: ""}
-       
+      <table>
+        <tbody>
+          <tr>
+            
+         </tr>
+         {price>0 ?<> <tr><td className="invisible">-------------------------------------------</td><td className="">Total price: {price.toFixed(2)} €</td><td><Button variant="primary" onClick={handleShow}> <h5>Order</h5>  </Button></td></tr> </>: <td></td>}
+         </tbody>
+      </table>
    
-    </Card.Text>
+    </div>
    </Card>
   
-        <Modal show={showM} onHide={handleClose} className='text-center'>
-          <Modal.Header closeButton>
+        <Modal show={showM} onHide={handleClose} className='text-center mt-5'>
+         
+        { showOrder&& <> 
+        <Modal.Header closeButton>
             <Modal.Title className='text-center'>Order Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            
            <Form>
             <Form.Group>
               <Form.Label>Name:</Form.Label>
@@ -159,7 +190,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
             <Form.Label>Surname:</Form.Label>
             <Form.Control type="text"onChange={getSurname}></Form.Control>
             <Form.Label>Email:</Form.Label>
-            <Form.Control type="email" onChange={getEmail}></Form.Control>
+            <Form.Control type="email" onChange={getEmail} ></Form.Control>
             <Form.Label>Password</Form.Label>
             <Form.Control type="password"></Form.Control>
             <Form.Label>Adress:</Form.Label>
@@ -170,12 +201,49 @@ const Cart = ({ cart, setCart, handleChange }) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Link to='/success' >
+       
             <Button variant="primary" onClick={()=>getProducts()}>
-              Save Changes
+              Procces and pay
             </Button>
-            </Link>
+           
+          </Modal.Footer></>} 
+          {
+            showPayment && 
+            <>
+             <Modal.Header className="stripe">
+            <Modal.Title className='text-center invisible'>Order Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            
+           <Form>
+            <Form.Group>
+              <Form.Label>Stripe Id:</Form.Label>
+              <Form.Control type="text" onChange={(e)=> setStripeId(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="email" onChange={getEmail} disabled value={email}></Form.Control>
+            <MDBInput wrapperClass='mb-4' className='mr-5 mt-4' label='Card Number'  id='formControlLg' type='email' size="sm"/>
+            <div className='d-flex'>
+              <MDBInput wrapperClass='mb-4' className='mr-5' label='Expiration' placeholder='MM/YY' id='formControlLg' type='email' size="sm"/>
+              <MDBInput wrapperClass='mb-4' className='mr-5' label='CVC' id='formControlLg' placeholder='CVC' type='email' size="sm" />
+              <MDBInput wrapperClass='mb-4' className='mr-5' label='Amount' id='formControlLg' type='email' size="sm" value={parseInt(price)+1+".00 €"} disabled/>
+            </div>
+            <p className=" pb-lg-2 " style={{color: '#393f81'}}>Don't have an account? <a href="#!" style={{color: '#393f81'}} className='pt-5'>Register here</a></p>
+           </Form>
+           <p className="text-danger">{paymentError}</p>
+          </Modal.Body>
+          <Modal.Footer className="payment">
+            <Button variant="secondary" onClick={()=>back()}>
+            <i className="bi bi-arrow-left"></i>
+            </Button>
+       
+            <Button variant="primary" onClick={()=>orderAndPay()}>
+              Order
+            </Button>
+           
           </Modal.Footer>
+            </>
+          }
         </Modal>
         </>
     </article>

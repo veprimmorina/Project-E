@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
             var firstProducts = await _context.products.Where(x => x.Category.Equals("Vegan")).Take(3).ToListAsync();
             var secondProducts = await _context.products.Where(x => x.Category.Equals("Diary Products")).Take(3).ToListAsync();
             var thirdProducts = await _context.products.Where(x => x.Category.Equals("Kids")).Take(3).ToListAsync();
-            return  await _context.products.OrderByDescending(x=> x.Id).Take(9).ToListAsync();
+            return  await _context.products.OrderByDescending(x=> x.Id).Take(12).ToListAsync();
         }
         [HttpGet("clicked")]
         public async Task<ActionResult<IEnumerable<Product>>> GetMostClckedProducts()
@@ -241,6 +241,8 @@ namespace WebApplication2.Controllers
             double pTotalPrice = 0;
             string pTotal = "";
             string totalMessage = "";
+            
+            
             for (int i=0; i<prod.Length; i++)
             {
                 productId = prod[0].Id;
@@ -279,7 +281,7 @@ namespace WebApplication2.Controllers
                     totalMessage +
                     "<tr><td></td><td></td><td>Total Price: </td><td>"+totalPrice+ " € </td></tr></table>" +
                     "<br>Adress: " + adress + 
-                    "  <br>Thanks for choosing us <h1>Market BM </h1>";
+                    "  <br>Thanks for choosing us <h1>Nugget Market </h1>";
                 mailMessage.IsBodyHtml = true;
 
                 var smtpClient = new SmtpClient("smtp.gmail.com")
@@ -293,8 +295,13 @@ namespace WebApplication2.Controllers
             
 
         }
-        
-    
+
+        [HttpGet("count/products")]
+
+        public async Task<int> CountProducts()
+        {
+            return await _context.products.CountAsync();
+        }
         private bool ProductExists(int id)
         {
             return _context.products.Any(e => e.Id == id);

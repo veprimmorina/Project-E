@@ -66,6 +66,9 @@ namespace WebApplication2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
 
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -92,6 +95,9 @@ namespace WebApplication2.Migrations
                     b.Property<string>("CustomerSurname")
                         .IsRequired()
                         .HasColumnType("nvarchar (100)");
+
+                    b.Property<int>("bought")
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId");
 
@@ -191,11 +197,19 @@ namespace WebApplication2.Migrations
                     b.Property<int>("amount")
                         .HasColumnType("int");
 
+                    b.Property<string>("barcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("clicked")
                         .HasColumnType("int");
 
                     b.Property<double>("discount")
                         .HasColumnType("float");
+
+                    b.Property<string>("ingredients")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("sold")
                         .HasColumnType("int");

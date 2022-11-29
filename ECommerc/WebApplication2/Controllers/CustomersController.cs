@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +49,7 @@ namespace WebApplication2.Controllers
 
         public async Task<ActionResult<IEnumerable<Customer>>> GetEmri(string emri)
         {
-            return await _context.customers.Where(x=>x.CustomerName.Contains(emri)).ToListAsync();
+            return await _context.customers.Where(x => x.CustomerName.Contains(emri)).ToListAsync();
 
         }
 
@@ -119,5 +121,71 @@ namespace WebApplication2.Controllers
         {
             return _context.customers.Any(e => e.CustomerId == id);
         }
+        [HttpGet("/verify/{code}/{email}")]
+        public void sendEmailVerification(long code, string email)
+        {
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("order.onlinemarket@gmail.com");
+            mailMessage.To.Add(email);
+            mailMessage.Subject = "Confirmation Code";
+            mailMessage.Body = "Your confirmation code is: " + code;
+            mailMessage.IsBodyHtml = true;
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("order.onlinemarket@gmail.com", "swurrvbphqijsnco"),
+                EnableSsl = true,
+
+            };
+            smtpClient.Send(mailMessage);
+        }
+        [HttpGet("send/confirm/{email}/{password}/{name}/{surname}/{phone}/{code}")]
+        public void sendEmail(string email, string password, string name, string surname, string phone)
+
+        {
+            Random random = new Random();
+            int code = random.Next(999999);
+
+            Customer customer = new Customer();
+            customer.CustomerName = name;
+            customer.CustomerAdress = "N/A";
+            customer.CustomerEmail = email;
+            customer.CustomerPassword = password;
+            customer.CustomerPhone = phone;
+            customer.CustomerSurname = surname;
+            customer.Code = code;
+            _context.Add(customer);
+            _context.SaveChanges();
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("veprimm1@gmail.com");
+            mailMessage.To.Add(email);
+            mailMessage.Subject = "Confirmation Code";
+            mailMessage.Body = "Your confirmation code is: " + code;
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("veprimm1@gmail.com", "wppdhyddblkwswte"),
+                EnableSsl = true,
+
+            };
+            smtpClient.Send(mailMessage);
+
+
+        }
+        [HttpGet("/get/best/customers")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetBestCustomers()
+        {
+            return await _context.customers.OrderByDescending(x => x.bought).ToListAsync();
+        }
+        [HttpGet("customer/by/email/{getemail}")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomerByEmail(string getemail)
+        {
+           return await _context.customers.Where(x=> x.CustomerEmail.Equals(getemail)).ToListAsync();
+
+           
+
+        }
     }
-}
+    }

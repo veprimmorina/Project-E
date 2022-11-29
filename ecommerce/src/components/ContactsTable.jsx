@@ -5,13 +5,14 @@ import { useEffect } from 'react'
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { Textarea } from 'react-bootstrap-icons';
 
-function ContactsTable() {
+function ContactsTable({commentId}) {
     const [contacts,setContact]=useState();
     const [cStatus, setStatus] = useState();
     const [contactId, setContactId] = useState();
     const [subject, setSubject] = useState();
     const [body, setBody] = useState();
     const [replyContact, setReplyContact] = useState();
+    const [message, setMessage] = useState('*Please confirm twice the change of status');
     const [showM, setShowM] = useState(false);
     const handleClose = () => setShowM(false);
     const handleShow = (id) => {setShowM(true); 
@@ -41,7 +42,7 @@ function ContactsTable() {
         setStatus(val.target.value);
     }
     function editContact(id){
-      alert(id)
+        
         axios.get('https://localhost:7103/api/Contacs/'+id).then(response=>{
             setContactId(response.data);
            }) 
@@ -62,7 +63,10 @@ function ContactsTable() {
     }
   return (
     <>
-    <Table striped bordered hover size="sm">
+    <div style={{overflow: "auto"}}>
+    <p className='lead text-center text-danger'>{message}</p>
+    <Table striped bordered hover size="sm" style={{overflow: "scroll"}}>
+      
     <thead>
       <tr>
       <th>#</th>
@@ -80,7 +84,7 @@ function ContactsTable() {
           contacts!=undefined ?  
           contacts.map((contact) => (
             <>
-            <tr>
+            <tr className={contact.contactsId==commentId ? "  opacity-50 shadow bg-dark contact" : ""}>
             <td>{contact.contactsId}</td>
             <td>{contact.name}</td>
             <td>{contact.email}</td>
@@ -89,7 +93,7 @@ function ContactsTable() {
             <td>{contact.status}<select onChange={getStatus}>{contact.status=="" ?<><option></option> <option value='Positive'>Positive</option><option value='Neutral'>Neutral</option> </>: contact.status=="Neutral" ? <><option value='Neutral'>Neutral</option> <option value='Positive'>Positive</option></>: <><option value='Positive'>Positive</option><option value='Neutral'>Neutral</option></> }</select></td>
             <td>{contact.isChecked==false ? <input type='checkbox' />: <input type='checkbox' checked />}</td>
             <td><Button variant='success' onClick={()=> editContact(contact.contactsId)}>Submit</Button></td>
-            <td><Button variant='primary' onClick={()=> handleShow(contact.contactsId)}><i class="bi bi-reply-fill"></i>Reply</Button></td>
+            <td><Button variant='primary' onClick={()=> handleShow(contact.contactsId)}><i className="bi bi-reply-fill"></i>Reply</Button></td>
             </tr>
             </>
             
@@ -100,6 +104,7 @@ function ContactsTable() {
     </tbody>
     
   </Table>
+  </div>
   <Modal show={showM} onHide={handleClose} className='text-center mt-5'>
   <Modal.Header closeButton>
     <Modal.Title className='text-center'>Reply</Modal.Title>

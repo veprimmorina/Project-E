@@ -10,6 +10,9 @@
 .clickable{
     cursor: pointer;
   }
+.x:hover{
+ background-color: red;
+}
 #bg{
     background-color: rgb(238, 238, 238);
 }
@@ -24,4 +27,36 @@
 }
 .product-title{
     font-family: Montserrat,sans-serif;
+}
+.links{
+    font-weight: "bold";
+    font-size: "13";
+}
+.contact td{
+    color: white;
+    font-weight: bold;
+}
+.contact td:hover{
+    color: white;
+}
+body{
+    overflow-x : hidden ;
+}
+.stripe{
+    background-image: url('https://kinsta.com/wp-content/uploads/2017/01/stripe-for-wordpress.png');
+    background-size: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.payment{
+    background-image: url('https://percenta-nanoproducts.com/wp-content/uploads/2021/07/paypal-visa-mastercard.png');
+    background-repeat: no-repeat;
+    margin-left: 25px;
+    background-size: 300px;
+}
+.visa{
+    background-image: url('https://1000logos.net/wp-content/uploads/2017/06/VISA-Logo-1992.png');
+}
+.card-hover:hover{
+    background-color: white;
 }

@@ -20,9 +20,9 @@ function ProductsTable({item}) {
        <td>250$</td>
        <td>Vegan</td>
        <td> <span className='quantity'>
-                <button ><i class="bi bi-dash-circle mr-2" ></i></button>
+                <button ><i className="bi bi-dash-circle mr-2" ></i></button>
                <input id="quantity" min="1" type="number" max="1" value='1' className='text-center' />
-               <button><i class="bi bi-plus-circle"></i></button>
+               <button><i className="bi bi-plus-circle"></i></button>
                </span></td>
       <td>250$</td>
        </tr>

@@ -105,6 +105,22 @@ namespace WebApplication2.Controllers
             return NoContent();
         }
 
+        [HttpGet("count/invoice")]
+
+        public async Task<int> Invoices()
+        {
+            return await _context.invoice.CountAsync();
+        }
+
+        [HttpGet("count/invoice/today")]
+
+        public async Task<int> CountTodayInvoices()
+        {
+            DateTime now = DateTime.Now;
+            string dateNow=now.ToString("yyyy-MM-dd");
+            return await _context.invoice.Where(x=> x.date.Equals(dateNow)).CountAsync();
+        }
+
         private bool FaturaExists(int id)
         {
             return _context.invoice.Any(e => e.InvoiceId == id);

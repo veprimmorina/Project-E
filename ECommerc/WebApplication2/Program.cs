@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using WebApplication2;
 using WebApplication2.Controllers;
 using WebApplication2.Models;
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "MyAllowedOrigins",
@@ -23,7 +25,7 @@ builder.Services.AddCors(options =>
                           // add the allowed origins
                       });
 });
-
+builder.Services.AddStripeInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

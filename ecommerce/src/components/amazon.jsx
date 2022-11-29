@@ -83,7 +83,7 @@ const Amazon = ({ handleClick, searchi, category }) => {
 
   return (
     <>
-    <section style={{backgroundColor: "#eee", width: "900px"}}>
+    <section style={{backgroundColor: "#eee"}}>
        <div className="container py-5">
     <div className="row">
       <p className="text-center text-danger">{error}</p>

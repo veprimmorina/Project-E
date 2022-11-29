@@ -23,7 +23,12 @@ namespace WebApplication2.Models
 
         [Column (TypeName ="nvarchar(100)")]
         public string CustomerAdress { get; set; }
+        [Column]
+        public int Code { get; set; }
 
+        [Column]
+        public int bought { get; set; }
+        
         public ICollection<Customer> Customers { get; set; }
 
     }

@@ -41,7 +41,7 @@ function MostClickedProductsTable() {
             <td>{product.category}</td>
             <td>{product.quantity}</td>
             <td>{product.price}</td>
-            <td>{product.clicked}</td>
+            <td>{product.clicked+" times"}</td>
             <td><Button><i className='bi bi-pen'></i></Button></td>
             <td><Button variant='danger'><i className='bi bi-trash'></i></Button></td>
             </tr>

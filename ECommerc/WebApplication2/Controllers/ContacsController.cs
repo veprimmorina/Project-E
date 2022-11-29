@@ -132,6 +132,18 @@ namespace WebApplication2.Controllers
         {
             return await _context.contacts.Where(x => x.status.Equals("Positive")).Take(10).ToListAsync();
         }
+
+        [HttpGet("unchecked")]
+        public  int GetUncheckedNumber()
+        {
+            return  _context.contacts.Count(x=> x.isChecked==false);
+        }
+
+        [HttpGet("unchecked/comments")]
+        public async Task<ActionResult<IEnumerable<Contacs>>> GetUncheckedComments()
+        {
+            return await _context.contacts.Where(x => x.status.Equals("")).ToListAsync();
+        }
     }
     
 }

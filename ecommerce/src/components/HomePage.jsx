@@ -25,11 +25,14 @@ function HomePage() {
   const [data, setData] = useState();
   const [search, setSearch] = useState("");
   const [pCategory, setCategory] = useState("");
+  const [consEmail, setConsEmail]=useState(localStorage.getItem(8));
+  const current = new Date();
 
   const handleClose = () => setShowM(false);
   const handleShow = () => setShowM(true);
   
  
+  
   const handleClick = (item) => {
     if (cart.indexOf(item) !== -1) return;
     setCart([...cart, item]);
@@ -62,6 +65,13 @@ function HomePage() {
   function kidsProducts(){
     setCategory("Per Femije")
   }
+  function logOut(){
+    localStorage.setItem(8,"");
+    window.location.href="http://localhost:3000";
+  }
+  function logIn(){
+    window.location.href="http://localhost:3000/log/in";
+  }
   return (
     <>
   <Navbar expand="lg"  className='header'>
@@ -71,22 +81,21 @@ function HomePage() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 
-                <Nav.Link>Home</Nav.Link>
-                <Link to={"/about/us"}>About us</Link>
-                <Nav.Link href="#link">Link</Nav.Link>
+                <Link to={''} style={{textDecoration: "none", color: "black", fontSize: ""}} className='mt-2'>Home</Link>
+                
+                <Nav.Link href="#link">Contact us</Nav.Link>
                 <NavDropdown title="Products" id="basic-nav-dropdown">
-                  <Link to={'/vegan/products'}>
+                 
                   <NavDropdown.Item onClick={()=> veganProducts()}>Vegan</NavDropdown.Item>
-                  </Link>
+                  
                   <NavDropdown.Item onClick={()=> kidsProducts()}>
                     Kids Products
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">Other Products</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
+                 
                 </NavDropdown>
+                <Link to={"/about/us"} style={{textDecoration: "none", color: "black", fontSize: "",marginRight: "20px", marginLeft: "11px"}} className='mt-2 '>About us</Link>
               </Nav>
               <Form className='d-flex'>
                  <Form.Control type='search' placeholder='Search Product' onChange={getData}>
@@ -94,17 +103,19 @@ function HomePage() {
                  </Form.Control>
                  <Button variant='primary' onClick={()=>getProducts()}><i className='bi bi-search'></i></Button>
               </Form>
+              { consEmail!="" ? <Button className='ml-5 ' variant='danger' onClick={()=> logOut()}><i className=" bi bi-box-arrow-left mr-1"></i>Log Out</Button>: <Button className='ml-5' onClick={()=> logIn()}><i className="bi bi-box-arrow-in-right mr-1"></i>Log in</Button>}
             </Navbar.Collapse>
           </Container>
         </Navbar>
    <Slider />
-   <div className='row' style={{backgroundColor: "rgb(238, 238, 238)"}}>
-    <div className='col'>
+   <div className='row ' style={{backgroundColor: "rgb(238, 238, 238)"}} >
+    <div className='col-lg '>
+    
    <Amazon handleClick={handleClick} searchi={search} category={pCategory}/>
    </div>
-   <div className='col mt-5'>
+   <div className='col-md mt-5 '>
         <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
-       <Carousel className='mt-4'>
+       <Carousel className='mt-4 d-none d-lg-flex'>
         <Carousel.Item>
           <img src='https://marketplace.canva.com/EAFLWg7g6TA/1/0/1131w/canva-blue-modern-fashion-sale-poster-pCRtyeCl2eY.jpg'/>
         </Carousel.Item>
@@ -114,7 +125,7 @@ function HomePage() {
        </Carousel>
     </div>
    </div>
-   <div>
+   <div className='mt-5 '>
     <Banners />
    </div>
    <h2 className='text-center'>Top Products</h2>
@@ -124,6 +135,7 @@ function HomePage() {
    </div>
    </div>
    <Footer />
+   
    </>
   )
 }

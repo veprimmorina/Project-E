@@ -7,6 +7,7 @@ import GoogleMapReact from 'google-map-react';
 import { useState } from 'react';
 import { comment } from 'postcss';
 import axios from 'axios';
+import NavBari from './NavBari';
 
 
 
@@ -16,6 +17,7 @@ function AboutUs() {
   const [comments, setComments] = useState();
   const [positive, setPositive] = useState();
   const [succesText, setSuccesText] = useState();
+  const [currentDate, setCurrentDate] = useState();
   function getName(val){
     setName(val.target.value)
   }
@@ -26,12 +28,18 @@ function AboutUs() {
     setComments(val.target.value)
   }
   function sendComment(){
+    var newDate = new Date();
+    var date=newDate.getDate().toString();
+    var month=newDate.getMonth();
+    var updatedMonth= month+1;
+    var year = newDate.getFullYear().toString();
+    setCurrentDate(date + "/"+ updatedMonth.toString()+ "/" + year);
     var Contacts = {
        name: name,
        email: email,
        comment: comments,
        status: "",
-       date: '2022',
+       date: currentDate,
        isChecked: false
     }
     axios.post('https://localhost:7103/api/Contacs',Contacts).then(response=>{
@@ -48,199 +56,142 @@ function AboutUs() {
   return (
     <div id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-          </button>
-          <a class="navbar-brand" href="#myPage">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#services">SERVICES</a></li>
-            <li><a href="#portfolio">PORTFOLIO</a></li>
-            <li><a href="#pricing">PRICING</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <NavBari />
     
-    <div class="jumbotron text-center">
-      <h1>Company</h1> 
-      <p>We specialize in blablabla</p> 
-      <form>
-        <div class="input-group">
-          <input type="email" class="form-control" size="50" placeholder="Email Address" required />
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Subscribe</button>
-          </div>
-        </div>
-      </form>
+    <div className="jumbotron text-center">
+      <h1>Nugget Market</h1> 
+      <p>Online food Market</p> 
+      
     </div>
     
-    <div id="about" class="container-fluid">
-      <div class="row">
-        <div class="col-sm-8">
+    <div id="about" className="container-fluid">
+      <div className="row">
+        <div className="col-sm-8">
           <h2 className='text-center'>About Company Page</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <button class="btn btn-default btn-lg">Get in Touch</button>
+          <button className="btn btn-default btn-lg">Get in Touch</button>
         </div>
-        <div class="col-sm-4">
+        <div className="col-sm-4">
           <img src='https://thebigmarket.in/static/media/fruits.7a0c69a7.jpeg' alt='photo'/>
         </div>
       </div>
     </div>
     
-    <div class="container-fluid bg-grey">
-      <div class="row">
-        <div class="col-sm-4">
+    <div className="container-fluid bg-grey">
+      <div className="row">
+        <div className="col-md-4 backg">
           <img src='https://static.vecteezy.com/system/resources/previews/003/819/588/original/mission-vision-values-web-page-template-free-vector.jpg' className='mt-5' />
         </div>
-        <div class="col-sm-8">
+        <div className="col-md-8 backg">
           <h2 className='text-center'>Our Values</h2>
-          <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
-          <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <h4><strong className='colored'>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
+          <p><strong className='colored'>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
       </div>
     </div>
     
-    <div id="services" class="container-fluid text-center">
+    <div id="services" className="container-fluid text-center">
       <h2>SERVICES</h2>
       <h4>What we offer</h4>
-      <div class="row ">
-        <div class="col-sm-4">
-          <i className='bi bi-truck h2'></i>
+      <div className="row ">
+        <div className="col-sm-4">
+          <i className='bi bi-truck h2' style={{color: "#008B8B"}}></i>
           
           <h4>Secure Transport</h4>
-          <p>Lorem ipsum dolor sit amet..</p>
+          <p>We deliver secure transport to your home</p>
         </div>
-        <div class="col-sm-4">
-        <i class="bi bi-balloon-heart-fill h2"></i>
+        <div className="col-sm-4">
+        <i className="bi bi-balloon-heart-fill h2" style={{color: "red"}}></i>
           <h4>LOVE</h4>
          
-          <p>Lorem ipsum dolor sit amet..</p>
+          <p>We take care to deliver products with love</p>
         </div>
-        <div class="col-sm-4">
-        <i class="bi bi-emoji-laughing h2"></i>
+        <div className="col-sm-4">
+        <i className="bi bi-emoji-laughing-fill h2" style={{color: "##D2691E"}}></i>
           <h4>Fresh products</h4>
-          <p>Lorem ipsum dolor sit amet..</p>
+          <p>Fresh products are our first priority</p>
+        </div>
+        <div className="col-sm-4 mt-5">
+        <i className="bi bi-emoji-smile-fill h2" style={{color: "#FFD700"}}></i>
+          <h4>Happines</h4>
+          <p>Together with products, we also bring happines</p>
+        </div>
+        <div className="col-sm-4 mt-5">
+        <i className="bi bi-check-square-fill h2" style={{color: "green"}}></i>
+          <h4>Correctnes</h4>
+          <p>We are always correct with our clients</p>
+        </div>
+        <div className="col-sm-4 mt-5">
+        <i className="bi bi-lightning-charge-fill h2" style={{color: "blue"}}></i>
+          <h4>Fast delivery</h4>
+          <p>Fast delivery to your home address</p>
         </div>
       </div>
    
-      <div class="row slideanim">
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-leaf logo-small"></span>
+      <div className="row slideanim">
+        <div className="col-sm-4">
+          <span className="glyphicon glyphicon-leaf logo-small"></span>
           <h4>GREEN</h4>
           <p>Lorem ipsum dolor sit amet..</p>
         </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-certificate logo-small"></span>
+        <div className="col-sm-4">
+          <span className="glyphicon glyphicon-certificate logo-small"></span>
           <h4>CERTIFIED</h4>
           <p>Lorem ipsum dolor sit amet..</p>
         </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-wrench logo-small"></span>
+        <div className="col-sm-4">
+          <span className="glyphicon glyphicon-wrench logo-small"></span>
           <h4 style={{color:"#303030"}}>HARD WORK</h4>
           <p>Lorem ipsum dolor sit amet..</p>
         </div>
       </div>
     </div>
     
-    <div id="portfolio" class="container-fluid text-center bg-grey">
-      <h2>Portfolio</h2>
-      <h4>What we have created</h4>
-      <div class="row text-center slideanim">
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="paris.jpg" alt="Paris" width="400" height="300"/>
-            <p><strong>Paris</strong></p>
-            <p>Yes, we built Paris</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="newyork.jpg" alt="New York" width="400" height="300"/>
-            <p><strong>New York</strong></p>
-            <p>We built New York</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img src="sanfran.jpg" alt="San Francisco" width="400" height="300"/>
-            <p><strong>San Francisco</strong></p>
-            <p>Yes, San Fran is ours</p>
-          </div>
-        </div>
-      </div>
-      
+    <div id="portfolio" className="container-fluid text-center bg-grey">
       <h2>Reviews from our customers</h2>
-      <Carousel className='bg-dark text-white'>
+      <Carousel variant='white'>
         {
           positive!=undefined ?
         positive.map((message) => (
-            
-          <Carousel.Item>
-          <p className='mt-4 h3 lead'>{message.name}</p>
-          <i>{"'"+message.comment+"'"}</i>
-          <p className='mt-2'>2022-10-10</p>
-          <p>.</p>
-          
-        </Carousel.Item>
-        )) : ""
+    <Carousel.Item className='bg-dark text-white' key={message.id}>
+    <p className='mt-4 h3 lead'>{message.name}</p>
+    <i>{"'"+message.comment+"'"}</i>
+    <p className='mt-2'>{message.date}</p>
+    <p>.</p>
+    
+  </Carousel.Item>
+          )) : ""
         }
+        </Carousel>
         
-        
-      </Carousel>
     </div>
     
-    <div id="pricing" class="container-fluid">
-      <div class="text-center row">
-        <h2>Gallery</h2>
-        <h4>Choose a payment plan that works for you</h4>
-        <div className='col-md'>
-          <img src='https://images.jdmagicbox.com/comp/bangalore/n9/080pxx80.xx80.181123174454.r9n9/catalogue/the-big-market-attibele-bangalore-supermarkets-saxcbazrjk.jpg' className='rounded'/>
-        </div>
-        <div className='col-md ml-auto mr-auto'>
-        <img src='https://thumbs.dreamstime.com/b/interior-carrefour-hypermarket-wallonia-belgium-july-shopping-cornflakes-section-90887980.jpg' className=' w-50 rounded '/>
-        <img src='https://www.sentrarak.com/wp-content/uploads/2017/02/visi-misi-marmon.jpg' className='mt-3 rounded w-50'/>
+   
     
-        </div>
-        <div className='col-md'>
-          <img src='https://eatbook.sg/wp-content/uploads/2020/08/prime-supermarket.jpg' className='w-50'/>
-        </div>
-      </div>
-      
-    </div>
-    
-    <div id="contact" class="container-fluid colored-background">
-      <h2 class="text-center ">CONTACT US</h2>
-      <div class="row colored-background">
-        <div class="col-sm-5 text-center mt-5">
+    <div id="contact" className="container-fluid colored-background">
+      <h2 className="text-center ">CONTACT US</h2>
+      <div className="row colored-background">
+        <div className="col-sm-5 text-center mt-5">
           <p>Contact us and we'll get back to you within 24 hours.</p>
-          <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
-          <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-          <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+          <p><span className="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
+          <p><span className="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+          <p><span className="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
         </div>
-        <div class="col-sm-7 mt-4">
-          <div class="row">
-            <div class="col-sm-6 form-group colored-background">
-              <input class="form-control" id="name" name="name" placeholder="Full name" type="text" required onChange={getName}/>
+        <div className="col-sm-7 mt-4">
+          <div className="row">
+            <div className="col-sm-6 form-group colored-background">
+              <input className="form-control" id="name" name="name" placeholder="Full name" type="text" required onChange={getName}/>
             </div>
-            <div class="col-sm-6 form-group colored-background">
-              <input class="form-control" id="email" name="email" placeholder="Email" type="email" required onChange={getEmail}/>
+            <div className="col-sm-6 form-group colored-background">
+              <input className="form-control mt-4 mt-md-0" id="email" name="email" placeholder="Email" type="email" required onChange={getEmail}/>
             </div>
           </div>
-          <textarea class="form-control mt-4" id="comments" name="comments" placeholder="Comment" rows="5" onChange={getComment}></textarea>
-          <div class="row colored-background">
-            <div class="col-sm-12 form-group text-center">
-              <button class="btn btn-primary text-center mt-3" onClick={()=> sendComment()}>Send</button>
+          <textarea className="form-control mt-4" id="comments" name="comments" placeholder="Comment" rows="5" onChange={getComment}></textarea>
+          <div className="row colored-background">
+            <div className="col-sm-12 form-group text-center">
+              <button className="btn btn-primary text-center mt-3" onClick={()=> sendComment()}>Send</button>
              { <p className='text-white mt-3 '>{succesText}</p>}
             </div>
           </div>
@@ -249,10 +200,9 @@ function AboutUs() {
     </div>
     
 
-    <img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style={{width:"100%"}} />
-    <video autoPlay loop muted id='video'>
-        <source src='https://youtu.be/I__DPhJkKWE' />
-    </video>
+   <div>
+    <p></p>
+    <p></p></div>
     <Footer />
     
 
