@@ -13,7 +13,7 @@ After the customers made order succesfully, they will accept an confirmation ema
 
 Page adiministrators will have the opportunity to add, modify, or delete products. They will have the chance to discount product price in percentage, which will be calculated automatically by program. Also they can see which product was most clicked by the user, the inovinces, stats, and feedbacks from users.
 
-![dashboard](https://user-images.githubusercontent.com/65460301/206163888-da09c11d-4ba9-4249-bf85-a8df090e8c88.png)
+![image](https://user-images.githubusercontent.com/65460301/206165080-f2091760-c537-4be8-ad26-59403f265d1c.png)
 
 
 
