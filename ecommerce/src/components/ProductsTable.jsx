@@ -24,6 +24,7 @@ function ProductsTable({item}) {
                <input id="quantity" min="1" type="number" max="1" value='1' className='text-center' />
                <button><i className="bi bi-plus-circle"></i></button>
                </span></td>
+               
       <td>250$</td>
        </tr>
       </table>
