@@ -12,11 +12,12 @@ import Banners from './Banners'
 import axios from 'axios'
 import TopProducts from './TopProducts'
 import AmazonTopProducts from './amazonTopProducts'
-import AmazonVeganProducts from './amazonVeganProducts'
 import { Box } from 'react-bootstrap-icons'
 import { Modal } from 'react-bootstrap'
 import Header from './Header'
 import { Link } from 'react-router-dom'
+import AmazonDiscountProducts from './amazonDiscountProducts'
+import { MDBSwitch } from 'mdb-react-ui-kit'
 function HomePage() {
   const [show, setShow] = useState(true);
   const [cart, setCart] = useState([]);
@@ -63,7 +64,7 @@ function HomePage() {
      setCategory("Vegane")
   }
   function kidsProducts(){
-    setCategory("Per Femije")
+    setCategory("Kids")
   }
   function logOut(){
     localStorage.setItem(8,"");
@@ -72,6 +73,7 @@ function HomePage() {
   function logIn(){
     window.location.href="http://localhost:3000/log/in";
   }
+ 
   return (
     <>
   <Navbar expand="lg"  className='header'>
@@ -81,10 +83,10 @@ function HomePage() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 
-                <Link to={''} style={{textDecoration: "none", color: "black", fontSize: ""}} className='mt-2'>Home</Link>
+                <Link to={''} style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}} className='costum-hover mt-2'>Home</Link>
                 
-                <Nav.Link href="#link">Contact us</Nav.Link>
-                <NavDropdown title="Products" id="basic-nav-dropdown">
+                <Nav.Link href="#link" style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>Contact us</Nav.Link>
+                <NavDropdown title="Products" id="basic-nav-dropdown" style={{textDecoration: "none", color: "white", fontSize: "",fontFamily: "fantasy"}}>
                  
                   <NavDropdown.Item onClick={()=> veganProducts()}>Vegan</NavDropdown.Item>
                   
@@ -95,7 +97,7 @@ function HomePage() {
                   <NavDropdown.Divider />
                  
                 </NavDropdown>
-                <Link to={"/about/us"} style={{textDecoration: "none", color: "black", fontSize: "",marginRight: "20px", marginLeft: "11px"}} className='mt-2 '>About us</Link>
+                <Link to={"/about/us"} style={{textDecoration: "none", color: "white", fontSize: "",fontFamily: "fantasy", marginRight: "20px", marginLeft: "11px"}} className='mt-2 '>About us</Link>
               </Nav>
               <Form className='d-flex'>
                  <Form.Control type='search' placeholder='Search Product' onChange={getData}>
@@ -103,12 +105,11 @@ function HomePage() {
                  </Form.Control>
                  <Button variant='primary' onClick={()=>getProducts()}><i className='bi bi-search'></i></Button>
               </Form>
-              { consEmail!="" ? <Button className='ml-5 ' variant='danger' onClick={()=> logOut()}><i className=" bi bi-box-arrow-left mr-1"></i>Log Out</Button>: <Button className='ml-5' onClick={()=> logIn()}><i className="bi bi-box-arrow-in-right mr-1"></i>Log in</Button>}
             </Navbar.Collapse>
           </Container>
         </Navbar>
    <Slider />
-   <div className='row ' style={{backgroundColor: "rgb(238, 238, 238)"}} >
+   <div className='row content' style={{backgroundColor: "rgb(238, 238, 238)"}} >
     <div className='col-lg '>
     
    <Amazon handleClick={handleClick} searchi={search} category={pCategory}/>
@@ -128,11 +129,18 @@ function HomePage() {
    <div className='mt-5 '>
     <Banners />
    </div>
-   <h2 className='text-center'>Top Products</h2>
-   <div className='row bg-dark '>
+   <h2 className='text-center heading-title'>Top Products</h2>
+   <div className='row bg-dark mb-5'>
     <div className='col'>
     <AmazonTopProducts handleClick={handleClick} />
    </div>
+   </div>
+   <h2 className='text-center'>DIscount Products</h2>
+   <div className='row mb-5'>
+    <div className='col'>
+      <AmazonDiscountProducts handleClick={handleClick} />
+   </div>
+
    </div>
    <Footer />
    

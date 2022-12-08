@@ -15,6 +15,7 @@ function MostClickedProductsTable() {
     })
 
   return (
+    <div className='dashboard-table'>
     <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -52,7 +53,7 @@ function MostClickedProductsTable() {
     </tbody>
     
   </Table>
-  
+ </div>
   )
 }
 

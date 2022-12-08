@@ -38,8 +38,17 @@ namespace WebApplication2.Controllers
             var firstProducts = await _context.products.Where(x => x.Category.Equals("Vegan")).Take(3).ToListAsync();
             var secondProducts = await _context.products.Where(x => x.Category.Equals("Diary Products")).Take(3).ToListAsync();
             var thirdProducts = await _context.products.Where(x => x.Category.Equals("Kids")).Take(3).ToListAsync();
+
+
             return  await _context.products.OrderByDescending(x=> x.Id).Take(12).ToListAsync();
         }
+
+        [HttpGet("discount/products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetDiscountProducts()
+        {
+            return await _context.products.Where(x => x.discount > 0).ToListAsync();
+        }
+
         [HttpGet("clicked")]
         public async Task<ActionResult<IEnumerable<Product>>> GetMostClckedProducts()
         {
@@ -80,7 +89,7 @@ namespace WebApplication2.Controllers
         [HttpGet("top/products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetTopProducts()
         {
-           return await _context.products.OrderByDescending(x => x.sold).Take(5).ToListAsync();
+           return await _context.products.OrderByDescending(x => x.sold).Take(8).ToListAsync();
             
            
         }
@@ -272,22 +281,22 @@ namespace WebApplication2.Controllers
             _context.SaveChanges();
             string photoPath = "https://img.freepik.com/premium-vector/street-market-business-company-logo_23-2148462526.jpg?w=2000";
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("veprimm1@gmail.com");
+            mailMessage.From = new MailAddress("order.onlinemarket@gmail.com");
             mailMessage.To.Add(email);
                 mailMessage.Subject = "Order Confirmation";
                 mailMessage.Body = 
-                    "Dear " + name + " " + surname + ", <br> By this email we are confirming your order <br>" +
+                    "Dear <b>" + name + " " + surname + ", </b> <br><br> By this email we are confirming your order <br>" +
                     "<table><tr><td> Product Name</td> <td> Product Price </td> <td> Product Quantity</td><td>Total Product Price</td></tr> " +
                     totalMessage +
                     "<tr><td></td><td></td><td>Total Price: </td><td>"+totalPrice+ " € </td></tr></table>" +
                     "<br>Adress: " + adress + 
-                    "  <br>Thanks for choosing us <h1>Nugget Market </h1>";
+                    "  <br><br>Thanks for choosing us <h1>Nugget Market </h1>";
                 mailMessage.IsBodyHtml = true;
 
                 var smtpClient = new SmtpClient("smtp.gmail.com")
                 {
                     Port = 587,
-                    Credentials = new NetworkCredential("veprimm1@gmail.com", "wppdhyddblkwswte"),
+                    Credentials = new NetworkCredential("order.onlinemarket@gmail.com", "swurrvbphqijsnco"),
                     EnableSsl = true,
 
                 };

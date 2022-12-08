@@ -55,6 +55,7 @@ function NewestProductTable() {
     }
   return (
   <>
+    <div className='dashboard-table'>
     <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -92,6 +93,7 @@ function NewestProductTable() {
     </tbody>
     
   </Table>
+  </div>
   <Modal show={showM} onHide={handleClose} className='text-center'>
   <Modal.Header closeButton>
     <Modal.Title className='text-center'>Product Details</Modal.Title>

@@ -14,7 +14,7 @@ function UsersTable() {
     })
   return (
     <>
-    <div >
+      <div className='dashboard-table'>
     <Table striped bordered hover size="sm" style={{overflow: "scroll"}}>
     <thead>
       <tr>

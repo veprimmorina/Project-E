@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { comment } from 'postcss';
 import axios from 'axios';
 import NavBari from './NavBari';
+import Collage from './Collage';
 
 
 
@@ -148,7 +149,7 @@ function AboutUs() {
         </div>
       </div>
     </div>
-    
+    <Collage />
     <div id="portfolio" className="container-fluid text-center bg-grey">
       <h2>Reviews from our customers</h2>
       <Carousel variant='white'>

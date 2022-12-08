@@ -14,7 +14,7 @@ const [userName, setUserName]=useState(localStorage.getItem(9));
   })
 })
     return (
-        <Navbar expand="lg"  className='header' style={{background: "#e5e7eb"}}>
+        <Navbar expand="lg"  style={{background: "#e5e7eb"}}>
           <Container>
             <Navbar.Brand href="#home"></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

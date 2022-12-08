@@ -32,6 +32,7 @@ function Dashboard() {
     const [users, setUsers] = useState(false);
     const [bestUsers, setBestUsers] = useState(false);
     const [stock, setStock] = useState();
+    const [cards, setCards] = useState(true);
     const {id}= useParams();
 function getAll(){
    setAllProducts(true);
@@ -43,6 +44,7 @@ function getAll(){
    setContact(false);
    setUsers(false);
    setBestUsers(false);
+   setCards(false);
 }
 
 function mostClicked(){
@@ -55,6 +57,7 @@ function mostClicked(){
   setContact(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 
 function bestSolded(){
@@ -67,6 +70,7 @@ function bestSolded(){
   setContact(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 function newestProduct(){
 setNewestProduct(true);
@@ -78,6 +82,7 @@ setAllProducts(false);
   setContact(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 function showStats(){
   setStats(true);
@@ -89,6 +94,7 @@ setAllProducts(false);
   setContact(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 
 function showInvoices(){
@@ -101,6 +107,7 @@ setAllProducts(false);
   setContact(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 
 function showContacts(){
@@ -113,6 +120,7 @@ setAllProducts(false);
   setBestSolded(false);
   setUsers(false);
   setBestUsers(false);
+  setCards(false);
 }
 function doSomething(){
 
@@ -127,6 +135,7 @@ setAllProducts(false);
   setMostClicked(false);
   setBestSolded(false);
   setBestUsers(false);
+  setCards(false);
 }
 function showBestUsers(){
   setBestUsers(true);
@@ -138,6 +147,7 @@ function showBestUsers(){
 setAllProducts(false);
   setMostClicked(false);
   setBestSolded(false);
+  setCards(false);
 }
 function logOut(){
   localStorage.setItem(9,"")
@@ -150,7 +160,7 @@ useEffect(()=>{
       setStock(response.data);
      })    
   });
-  id!=undefined ? setContact(true) : doSomething()
+  id!=undefined ? showContacts() : doSomething()
 })
 const options = {
   exportEnabled: true,
@@ -261,7 +271,7 @@ const options = {
     <SubMenu label="Products" className='mt-5'> 
       <MenuItem onClick={()=> getAll()}> <i className="bi bi-cart-fill mr-2" ></i>All Products </MenuItem>
       <MenuItem onClick={()=>bestSolded()}><i className="bi bi-award-fill"></i> Best solded products </MenuItem>
-      <MenuItem onClick={()=>newestProduct()}><i className="bi bi-arrow-up-square-fill mr-2"></i>Newest products</MenuItem>
+      <MenuItem onClick={()=>newestProduct()}><i className="bi bi-arrow-up-square-fill mr-2"></i>New products</MenuItem>
       <MenuItem onClick={()=> mostClicked()}><i className="bi bi-hand-index-fill mr-2"></i>Most clicked products</MenuItem>
     </SubMenu>
     <MenuItem onClick={()=> showStats()}> <i className="bi bi-activity mr-3"></i> Stats </MenuItem>
@@ -275,7 +285,7 @@ const options = {
     </ProSidebarProvider>
     </div>
     
-    <div className='w-100'>
+    <div className='w-100 dashboard-content'>
    <Header news={notification}/>
    { stats&&
    <>
@@ -289,8 +299,9 @@ const options = {
   </div>
   </>
 }
-<MainPageDashboard />
-   { allProducts && <AllProductsTable />}
+
+    { cards && <MainPageDashboard />}
+    { allProducts && <AllProductsTable />}
     { mostClickedP && <MostClickedProductsTable /> }
     { bestSoldedP && <BestSoldedTable />}
     {newestP && <NewestProductTable />}

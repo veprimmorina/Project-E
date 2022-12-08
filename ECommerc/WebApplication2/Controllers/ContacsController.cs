@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2;
 using WebApplication2.Models;
-
+ 
 namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
@@ -143,6 +143,18 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult<IEnumerable<Contacs>>> GetUncheckedComments()
         {
             return await _context.contacts.Where(x => x.status.Equals("")).ToListAsync();
+        }
+
+        [HttpGet("count/unchecked/comments")]
+        public async Task<int> GetUncheckedCommentsNumber()
+        {
+            return await _context.contacts.Where(x=> x.status.Equals("")).CountAsync();
+        }
+
+        [HttpGet("all/feedbacks")]
+        public async Task<int> GetAllFeedbacks()
+        {
+            return await _context.contacts.CountAsync();
         }
     }
     

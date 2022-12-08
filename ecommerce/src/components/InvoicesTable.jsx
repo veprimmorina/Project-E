@@ -4,12 +4,14 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Form, Modal, Table } from 'react-bootstrap';
+import { format } from 'date-fns'
+
 
 function InvoicesTable() {
   const [photoPath, setPhotoPath] = useState();
   const [name, setName] = useState();
   const [category, setCategory] = useState();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState('');
   const [dateInvoice, setDateInvoice]= useState(false);
   const [price, setPrice] = useState();
     const [products, setProducts] = useState([]);
@@ -98,7 +100,6 @@ function InvoicesTable() {
 
     function getDate(val){
         setDate(val.target.value)
-  
     }
     function gPhotoPath(val){
       productData.photoPath=val.target.value;
@@ -145,6 +146,7 @@ function InvoicesTable() {
        <Button onClick={()=>dateInvoices()}>Find</Button>
        </div>
   </div>
+  <div className='dashboard-table'>
     <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -190,6 +192,7 @@ function InvoicesTable() {
     </tbody>
     
   </Table>
+  </div>
   <Modal show={showM} onHide={handleClose} className='text-center'>
   <Modal.Header closeButton>
     <Modal.Title className='text-center'>Product Details</Modal.Title>

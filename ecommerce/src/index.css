@@ -17,7 +17,26 @@
     background-color: rgb(238, 238, 238);
 }
 .header{
-    background-color: rgb(225, 90, 38);;
+    background-color: rgb(225, 90, 38);
+    
+}
+.header-links{
+    text-decoration: "none";
+    color: "white";
+    font-family: "fantasy";
+}
+#basic-nav-dropdown{
+    color: white;
+}
+.product-name{
+    font-family: fantasy;
+}
+.product-info{
+    font-family: cursive;
+}
+.heading-title{
+    font-family: cursive;
+    
 }
 .navbar-nav{
     margin-left: 260px;
@@ -60,3 +79,83 @@ body{
 .card-hover:hover{
     background-color: white;
 }
+.discount{
+    position: relative;
+    top: 20px;
+    left: 160px;
+    transform: rotate(30deg);
+    height: 20px;
+    width: 100px;
+    box-shadow: 50px;
+    border-radius: 20px;
+    
+}
+.container .carousel{
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+.container .carousel .item{
+    margin: 10px;
+    padding: 10px;
+    width: 280px;
+    border-radius: 10px;
+    flex: none;
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+ .container .carousel::-webkit-scrollbar{
+   display: none;
+ }
+.text{
+    font-size: 15px;
+}
+.card-content{
+    width: 250px;
+}
+.content{
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.dashboard-table{
+    overflow-y: auto;
+    height: 700px;
+}
+.dashboard-title{
+    font-family: fantasy;
+    font-size: xx-large;
+}
+.dashboard-description{
+    font-family: cursive;
+    font-size: x-large;
+}
+.dashboard-card:hover {
+    background-color: aliceblue;
+}
+.modal-payment{
+    background-image: url('');
+}
+.an{
+    text-decoration: none;
+}
+a:hover{
+    color: blue;
+}
+@keyframes fadeInAnimation {
+ 0% {
+     opacity: 0;
+ }
+ 100% {
+     opacity: 1;
+  }
+}
+@media only screen and (min-width: 600px) {
+    
+   .cards{
+    width: 800px;
+    margin-right: 100px;
+   }
+  }
+ 

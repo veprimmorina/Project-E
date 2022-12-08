@@ -28,7 +28,7 @@ namespace WebApplication2.Controllers
                 customer,
                 ct);
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("veprimm1@gmail.com");
+            mailMessage.From = new MailAddress("order.onlinemarket@gmail.com");
             mailMessage.To.Add(createdCustomer.Email);
             mailMessage.Subject = "Your stripe account";
             mailMessage.Body =
@@ -40,7 +40,7 @@ namespace WebApplication2.Controllers
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("veprimm1@gmail.com", "wppdhyddblkwswte"),
+                Credentials = new NetworkCredential("order.onlinemarket@gmail.com", "swurrvbphqijsnco"),
                 EnableSsl = true,
 
             };

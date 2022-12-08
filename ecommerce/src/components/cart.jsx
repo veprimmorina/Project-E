@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Form, Modal } from "react-bootstrap";
 import axios from "axios";
-import $ from 'jquery'
+import $, { error } from 'jquery'
 import { Link } from "react-router-dom";
 import { MDBInput } from "mdb-react-ui-kit";
 
@@ -12,13 +12,21 @@ const Cart = ({ cart, setCart, handleChange }) => {
   const [product,setProduct]=useState(4);
   const [showM, setShowM] = useState(false);
   const [errorMessage, setErrorMessage]=useState('');
+  const [priceError, setPriceError] = useState('')
   const [paymentError, setPaymentError]=useState('');
   const [email, setEmail]=useState();
   const [name, setName]= useState();
   const [surname, setSurname]= useState();
   const [address, setAdress]= useState();
   const handleClose = () => setShowM(false);
-  const handleShow = () => setShowM(true);
+  const handleShow = () => {
+    if(price<30.00){
+       setPriceError('Minumum price required for order is 30€')
+    }else{
+      setShowM(true);
+      setPriceError('')
+    }
+   }
   const [showOrder, setShowOrder] = useState(true);
   const [showPayment, setShowPayment] = useState(false);
   
@@ -27,9 +35,11 @@ const Cart = ({ cart, setCart, handleChange }) => {
   function validateQuantity(item,amount,quantity){
     if(amount>quantity){
       setErrorMessage('Maxium of order for '+item.name+' is '+quantity)
+      setPriceError('')
       handleChange(item, -1)
     }else{
       setErrorMessage('')
+      setPriceError('')
     }
   }
   function back(){
@@ -44,6 +54,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
     setCart(arr);
     handlePrice();
     setErrorMessage('')
+    setPriceError('')
   };
   const handlePrice = () => {
     let ans = 0;
@@ -116,14 +127,15 @@ const Cart = ({ cart, setCart, handleChange }) => {
     <article>
         <>
         
-        <Card className='shadow-lg mt-lg-3'>
+        <Card className='shadow-lg mt-lg-4'>
     <Card.Title id="card-title" className='d-flex justify-content-between rounded' style={{background: "#e15a26"}}>
     <i className="ml-5 mr-5 mt-2 bi bi-cart4 bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong "  style={{width: "35px", height: "35px"}}></i>
     <p className='text-white mt-3 lead'>Shopping cart</p>
     <p className='text-white mt-3 lead'></p>
     </Card.Title>
-    <div className="text-center card-text" style={{height: "600px", overflow: "auto"}}>
-    <p className="text-center text-danger h5 mt-3 mb-3">{""+errorMessage}</p> 
+    <div className="text-center card-text" style={{height: "850px", overflow: "auto"}}>
+    <p className="text-center text-danger h5 mt-3 mb-3">{""+errorMessage}</p>
+    <p className="text-center text-danger h5 mt-3 mb-3">{""+priceError}</p> 
     <table width="100%">
      {
      price!=0 ?
@@ -149,7 +161,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <tr key={item.id} className='border shadow-sm' id={item.id}><td className="clickable " onClick={() => handleRemove(item.id)}><b>x</b></td>
         <td><img src={item.photoPath} className='img-fluid' alt='product' width="45px" heigth="40px"/> </td>
        <td>{item.name}</td>
-       <td>{item.discount!=0 ? (item.price-(item.discount*item.price/100)).toFixed(2)+" €": item.price}</td>
+       <td>{item.discount!=0 ? (item.price-(item.discount*item.price/100)).toFixed(2)+" €": item.price+" €"}</td>
       
        <td> <span className='quantity'>
                 <button ><i className="bi bi-dash-circle " onClick={() => {handleChange(item, -1); setError();}} ></i></button>
@@ -180,7 +192,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <Modal.Header closeButton>
             <Modal.Title className='text-center'>Order Details</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modal-payment">
             
            <Form>
             <Form.Group>
@@ -191,8 +203,6 @@ const Cart = ({ cart, setCart, handleChange }) => {
             <Form.Control type="text"onChange={getSurname}></Form.Control>
             <Form.Label>Email:</Form.Label>
             <Form.Control type="email" onChange={getEmail} ></Form.Control>
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password"></Form.Control>
             <Form.Label>Adress:</Form.Label>
             <Form.Control type="text" onChange={getAdress}></Form.Control>
            </Form>
@@ -228,7 +238,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
               <MDBInput wrapperClass='mb-4' className='mr-5' label='CVC' id='formControlLg' placeholder='CVC' type='email' size="sm" />
               <MDBInput wrapperClass='mb-4' className='mr-5' label='Amount' id='formControlLg' type='email' size="sm" value={parseInt(price)+1+".00 €"} disabled/>
             </div>
-            <p className=" pb-lg-2 " style={{color: '#393f81'}}>Don't have an account? <a href="#!" style={{color: '#393f81'}} className='pt-5'>Register here</a></p>
+            <p className=" pb-lg-2 " style={{color: '#393f81'}}>Don't have an account? <Link to='/register' target='_blank' style={{color: '#393f81'}} className='pt-5'>Register here</Link></p>
            </Form>
            <p className="text-danger">{paymentError}</p>
           </Modal.Body>

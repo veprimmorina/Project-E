@@ -20,15 +20,16 @@ function NavBari() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                
-                <Nav.Link>Home</Nav.Link>
-                <Link to={"/about/us"} style={{textDecoration: "none", color: "black"}} className='mt-2'>About us</Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Products" id="basic-nav-dropdown">
+                <Link to={'/'} className='an'>
+                <Nav.Link style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>Home</Nav.Link>
+                </Link>
+                <Link to={"/about/us"} style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}} className='mt-2'>About us</Link>
+                <Nav.Link href="#link" style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>Link</Nav.Link>
+                <NavDropdown title="Products" id="basic-nav-dropdown" style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>
                   
-                  <NavDropdown.Item>Vegan</NavDropdown.Item>
+                  <NavDropdown.Item >Vegan</NavDropdown.Item>
                   
-                  <NavDropdown.Item>
+                  <NavDropdown.Item >
                     Kids Products
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">Other Products</NavDropdown.Item>
@@ -42,7 +43,7 @@ function NavBari() {
                  </Form.Control>
                  <Button variant='primary'><i className='bi bi-search'></i></Button>
               </Form>
-              { consEmail!="" ? <Button className='ml-5 ' variant='danger' onClick={()=> logOut()}><i className=" bi bi-box-arrow-left mr-1"></i>Log Out</Button>: <Button className='ml-5' onClick={()=> logIn()}><i className="bi bi-box-arrow-in-right mr-1"></i>Log in</Button>}
+            
             </Navbar.Collapse>
           </Container>
         </Navbar>

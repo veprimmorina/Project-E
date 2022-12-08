@@ -18,6 +18,8 @@ namespace WebApplication2.Models
 
         public List<Product> Productet { get; set; }
 
+        public string Product { get; set; }
+
 
     }
 }

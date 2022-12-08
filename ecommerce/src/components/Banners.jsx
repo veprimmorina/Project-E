@@ -5,7 +5,7 @@ function Banners() {
   return (
     <div className='row'>
         <div className='col-md'>
-        <Card>
+        <Card className='shadow'>
          <Card.Header>
             <Card.Img src='https://i.pinimg.com/736x/63/d7/ff/63d7ff834151ba837294c915a1e9de9f.jpg' className='img-fluid h-25'>
             </Card.Img>

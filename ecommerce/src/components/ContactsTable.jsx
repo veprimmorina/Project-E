@@ -63,6 +63,7 @@ function ContactsTable({commentId}) {
     }
   return (
     <>
+    <div className='dashboard-table'>
     <div style={{overflow: "auto"}}>
     <p className='lead text-center text-danger'>{message}</p>
     <Table striped bordered hover size="sm" style={{overflow: "scroll"}}>
@@ -104,6 +105,7 @@ function ContactsTable({commentId}) {
     </tbody>
     
   </Table>
+  </div>
   </div>
   <Modal show={showM} onHide={handleClose} className='text-center mt-5'>
   <Modal.Header closeButton>

@@ -154,8 +154,8 @@ function AllProductsTable() {
         price: productData.price,
         madeInPhoto: productData.madeInPhoto,
         discount: productData.discount,
-        ingredients: ingredients,
-        barcode: barcode
+        ingredients: productData.ingredients,
+        barcode: productData.barcode
       }
       axios.put('https://localhost:7103/api/Products/'+productData.id, Product).then(response=>{
         console.log(response.data)
@@ -178,6 +178,7 @@ function AllProductsTable() {
         <Button variant='success' onClick={()=>{productAdd()}}>Add Product</Button>
        </div>
   </div>
+  <div className='dashboard-table'>
     <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -232,6 +233,7 @@ function AllProductsTable() {
     </tbody>
     
   </Table>
+  </div>
   <Modal show={showM} onHide={handleClose} className='text-center'>
   <Modal.Header closeButton>
     <Modal.Title className='text-center'>Product Details</Modal.Title>

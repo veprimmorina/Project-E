@@ -85,7 +85,7 @@ const Amazon = ({ handleClick, searchi, category }) => {
     <>
     <section style={{backgroundColor: "#eee"}}>
        <div className="container py-5">
-    <div className="row">
+    <div className='row cards'>
       <p className="text-center text-danger">{error}</p>
       {product.map((item) => (
         <Cards key={item.id} item={item} handleClick={handleClick} />
