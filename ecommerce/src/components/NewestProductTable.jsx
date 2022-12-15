@@ -20,8 +20,8 @@ function NewestProductTable() {
     useEffect(()=>{
         axios.get('https://localhost:7103/api/Products').then(response=>{
     setProducts(response.data);
-   }) 
-    })
+      }) 
+    },[])
 
     function getData(val){
       productData.name=val.target.value;

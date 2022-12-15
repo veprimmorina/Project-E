@@ -11,8 +11,8 @@ function MostClickedProductsTable() {
     useEffect(()=>{
         axios.get('https://localhost:7103/api/Products/clicked').then(response=>{
     setProducts(response.data);
-   }) 
-    })
+      }) 
+    },[])
 
   return (
     <div className='dashboard-table'>

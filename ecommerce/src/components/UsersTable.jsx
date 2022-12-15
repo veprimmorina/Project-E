@@ -11,7 +11,7 @@ function UsersTable() {
         axios.get('https://localhost:7103/api/Customers').then(response=>{
             setUser(response.data)
         })
-    })
+    },[])
   return (
     <>
       <div className='dashboard-table'>

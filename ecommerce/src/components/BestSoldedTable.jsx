@@ -20,8 +20,8 @@ function BestSoldedTable() {
     useEffect(()=>{
         axios.get('https://localhost:7103/api/Products/all/top/products').then(response=>{
     setProducts(response.data);
-   }) 
-    })
+       }) 
+    },[])
 
     function getData(val){
       productData.name=val.target.value;

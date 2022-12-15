@@ -72,7 +72,7 @@ function AllProductsTable() {
       setBarCode(val.target.value)
     }
     function getDiscount(val){
-      setIngredients(val.target.value)
+      setDiscount(val.target.value)
     }
 
     function addNewProduct(){
@@ -258,9 +258,9 @@ function AllProductsTable() {
     <Form.Label>Discount: </Form.Label>
     <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={getDiscount}></Form.Control>
     <Form.Label>Ingredients: </Form.Label>
-    <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={gIngredients}></Form.Control>
+    <Form.Control type='text' value={productData!=null ? productData.ingredients : "N/A"} onChange={gIngredients}></Form.Control>
     <Form.Label>Barcode: </Form.Label>
-    <Form.Control type='text' value={productData!=null ? productData.discount : "N/A"} onChange={gBarCode}></Form.Control>
+    <Form.Control type='text' value={productData!=null ? productData.barcode : "N/A"} onChange={gBarCode}></Form.Control>
    </Form>
   </Modal.Body>
   <Modal.Footer>

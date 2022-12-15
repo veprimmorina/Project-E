@@ -13,7 +13,7 @@ const AmazonTopProducts = ({ handleClick }) => {
     axios.get("https://localhost:7103/api/Products/category/vegan/").then(response=>{
       setProducts(response.data);
     })
-  })
+  },[])
 
 
   return (

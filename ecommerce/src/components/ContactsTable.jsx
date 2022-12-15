@@ -24,7 +24,7 @@ function ContactsTable({commentId}) {
         axios.get('https://localhost:7103/api/Contacs').then(response=>{
             setContact(response.data);
            }) 
-    })
+    },[])
     function getSubject(val){
          setSubject(val.target.value);
     }

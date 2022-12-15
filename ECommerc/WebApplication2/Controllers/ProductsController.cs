@@ -250,6 +250,7 @@ namespace WebApplication2.Controllers
             double pTotalPrice = 0;
             string pTotal = "";
             string totalMessage = "";
+            string productInvoice = "";
             
             
             for (int i=0; i<prod.Length; i++)
@@ -262,7 +263,8 @@ namespace WebApplication2.Controllers
                 producti.sold = producti.sold+producti.amount;
                 _context.Update(producti);
                 _context.SaveChanges();
-                pName =pName+" \n"+prod[i].Name;
+                productInvoice = productInvoice+" "+prod[i].Name+" "+ Math.Round((prod[i].Price - ((prod[i].discount * prod[i].Price / 100))), 2) + " €  x" + prod[i].amount+" "+ Math.Round(((firstProduct.Price - (firstProduct.discount * firstProduct.Price / 100)) * firstProduct.amount), 2)+ " € ;";
+                pName =pName+" "+prod[i].Name;
                 pPrice = pPrice + " "+prod[i].Price;
                 pAmount = pAmount + " "+ prod[i].amount;
                 pTotalPrice = firstProduct.amount * firstProduct.Price;
@@ -277,6 +279,7 @@ namespace WebApplication2.Controllers
             invoice.customerEmail = email;
             invoice.date=finalDate;
             invoice.time=finalTime;
+            invoice.ProductsList = productInvoice;
             _context.Add(invoice);
             _context.SaveChanges();
             string photoPath = "https://img.freepik.com/premium-vector/street-market-business-company-logo_23-2148462526.jpg?w=2000";

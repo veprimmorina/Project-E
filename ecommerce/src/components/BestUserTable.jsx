@@ -13,7 +13,7 @@ function BestUserTable() {
         axios.get('https://localhost:7103/get/best/customers').then(response=>{
             setUser(response.data)
         })
-    })   
+    },[])   
   return (
     <>
     <div >
@@ -23,6 +23,7 @@ function BestUserTable() {
       <th>#</th>
       <th>Email</th>
       <th>Has Bought</th>
+      <th>Total in Euro</th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@ function BestUserTable() {
             <td>{user.customerId}</td>
             <td>{user.customerEmail}</td>  
             <td>{user.bought+" times"}</td> 
+            <td>{user.code+"€"}</td>
             </tr>
             </>
             

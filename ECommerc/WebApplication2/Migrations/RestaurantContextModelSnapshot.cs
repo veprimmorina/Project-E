@@ -114,6 +114,10 @@ namespace WebApplication2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"), 1L, 1);
 
+                    b.Property<string>("ProductsList")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("customerEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -146,6 +150,10 @@ namespace WebApplication2.Migrations
                     b.Property<int?>("CustomerId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Product")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

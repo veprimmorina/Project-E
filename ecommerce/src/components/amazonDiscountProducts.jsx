@@ -12,7 +12,7 @@ const AmazonDiscountProducts = ({handleClick}) => {
       axios.get("https://localhost:7103/api/Products/discount/products").then(response=>{
         setProducts(response.data);
       })
-    })
+    },[])
     const handleLeftClick = (e) =>{
       e.preventDefault();
       console.log(carousel.current.offsetWidth)

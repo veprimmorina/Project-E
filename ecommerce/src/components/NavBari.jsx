@@ -20,9 +20,9 @@ function NavBari() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Link to={'/'} className='an'>
+                
                 <Nav.Link style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>Home</Nav.Link>
-                </Link>
+                
                 <Link to={"/about/us"} style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}} className='mt-2'>About us</Link>
                 <Nav.Link href="#link" style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>Link</Nav.Link>
                 <NavDropdown title="Products" id="basic-nav-dropdown" style={{textDecoration: "none", color: "white", fontSize: "", fontFamily: "fantasy"}}>

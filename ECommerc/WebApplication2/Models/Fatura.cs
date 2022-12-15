@@ -21,7 +21,8 @@ namespace WebApplication2.Models
         public string time { get; set; }
         [Column]
         public ICollection<Product> Products { get; set; }
-
+        [Column]
+        public string ProductsList { get; set; }
 
 
     }

@@ -14,12 +14,12 @@ function ProductId() {
      axios.get("https://localhost:7103/api/Products/"+id).then(response=>{
       setProduct(response.data);
      });
-   })
+   },[])
   return (
     <>
     <NavBari />
     <div className='container' id='bg'>
-    <div className='row'>
+    <div className='row mb-5'>
         <div className='col-md mt-auto mb-auto pt-5'>
             <Card className='shadow'>
                 <Card.Img src={product.photoPath} className='img-fluid' width="20">

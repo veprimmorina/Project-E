@@ -18,6 +18,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
   const [name, setName]= useState();
   const [surname, setSurname]= useState();
   const [address, setAdress]= useState();
+  const[errorValidate, setErrorValidate] = useState("");
   const handleClose = () => setShowM(false);
   const handleShow = () => {
     if(price<30.00){
@@ -78,8 +79,10 @@ const Cart = ({ cart, setCart, handleChange }) => {
       console.log('success');
     })  
     */
+  
    setShowOrder(false)
    setShowPayment(true)
+   
    // axios.post('https://localhost:7103/api/Products/send/'+localStorage.getItem(8)+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
      // console.log(response.data);
       //console.log(cart)
@@ -111,8 +114,13 @@ const Cart = ({ cart, setCart, handleChange }) => {
     axios.post('https://localhost:7103/api/Stripe/payment/add',AddStripePayment).then(response=>{
         if(response.data!=""){
           axios.post('https://localhost:7103/api/Products/send/'+email+"/"+product+"/"+name+"/"+surname+"/"+address+"/"+price.toFixed(2), cart).then(response=>{
+          
       console.log(response.data);
       console.log(cart)
+    })
+   
+    axios.get('https://localhost:7103/api/Customers/new/order/'+email+"/"+(parseInt(price)+1)*100).then(response=>{
+      console.log(response.data)
     })
           window.location.href="http://localhost:3000/success/"+email;
         }
@@ -176,10 +184,9 @@ const Cart = ({ cart, setCart, handleChange }) => {
       </table>
       <table>
         <tbody>
-          <tr>
-            
-         </tr>
-         {price>0 ?<> <tr><td className="invisible">-------------------------------------------</td><td className="">Total price: {price.toFixed(2)} €</td><td><Button variant="primary" onClick={handleShow}> <h5>Order</h5>  </Button></td></tr> </>: <td></td>}
+          
+         {price>0 ?<> <tr><td className="invisible">-------------------------------------------</td><td className="">Total price: <b>{price.toFixed(2)} €</b></td></tr>
+         <tr><td className="invisible">-------------------------------------------</td><td><Button variant="primary" className="mt-3" onClick={handleShow}> <h5>Order</h5>  </Button></td></tr> </>: <tr><td></td></tr>}
          </tbody>
       </table>
    
@@ -207,6 +214,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
             <Form.Control type="text" onChange={getAdress}></Form.Control>
            </Form>
           </Modal.Body>
+          {errorValidate}
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close

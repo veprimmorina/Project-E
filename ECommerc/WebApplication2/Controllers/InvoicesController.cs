@@ -29,9 +29,11 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet("date/{data}")]
-        public async Task<ActionResult<IEnumerable<Fatura>>> GetInvoiceData(string data)
+        public async Task<ActionResult<IEnumerable<Fatura>>> GetInvoiceData(DateTime data)
         {
-            return await _context.invoice.Where(x => x.date.Equals(data)).ToListAsync();
+            
+            string date = data.ToString("yyyy-MM-dd");
+            return await _context.invoice.Where(x => x.date.Equals(date)).ToListAsync();
         }
         // GET: api/Invoices/5
         [HttpGet("{id}")]
@@ -121,6 +123,33 @@ namespace WebApplication2.Controllers
             return await _context.invoice.Where(x=> x.date.Equals(dateNow)).CountAsync();
         }
 
+        [HttpGet("invoice/{id}")]
+        public async Task<ActionResult<Fatura>> GetInvoiceId(int id)
+        {
+            var invoice = _context.invoice.FindAsync(id);
+
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            return await invoice;
+        }
+
+        [HttpGet("today/invoices")]
+        public async Task<ActionResult<IEnumerable<Fatura>>> GetTodayInvoices()
+        {
+            DateTime now = DateTime.Now;
+            string dateNow = now.ToString("yyyy-MM-dd");
+            return await _context.invoice.Where(x => x.date.Equals(dateNow)).ToListAsync();
+
+        }
+
+        [HttpGet("searched/{search}")]
+        public async Task<ActionResult<IEnumerable<Fatura>>> GetInvoiceSearch(string search)
+        {
+            return await _context.invoice.Where(x => x.customerName.Contains(search)).ToListAsync();
+        }
         private bool FaturaExists(int id)
         {
             return _context.invoice.Any(e => e.InvoiceId == id);

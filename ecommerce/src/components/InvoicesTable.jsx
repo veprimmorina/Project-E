@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { format } from 'date-fns'
+import { Link } from 'react-router-dom';
 
 
 function InvoicesTable() {
@@ -30,19 +31,17 @@ function InvoicesTable() {
 
 
     useEffect(()=>{
-        dateInvoice=="" ? axios.get('https://localhost:7103/api/Invoices').then(response=>{
+         axios.get('https://localhost:7103/api/Invoices').then(response=>{
     setProducts(response.data);
    })
-   :
-   axios.get('https://localhost:7103/api/Invoices/date/'+date).then(response=>{
-    setProducts(response.data);
-    })
-})
+},[])
 
 
 
     function dateInvoices(){
-      setDateInvoice(true);
+      axios.get('https://localhost:7103/api/Invoices/date/'+date).then(response=>{
+    setProducts(response.data);
+    })
     }
     function getPhotoPath(val){
       setPhotoPath(val.target.value);
@@ -84,7 +83,6 @@ function InvoicesTable() {
     }
     function getSearch(val){
      setSearched(val.target.value);
-     setHasSearch(true);
     }
     function getData(val){
       productData.name=val.target.value;
@@ -129,17 +127,26 @@ function InvoicesTable() {
      }) 
      alert('Succesfully edited')
     }
-    function deleteProduct(id){
-      axios.delete('https://localhost:7103/api/Products/'+id).then(response=>{
-        console.log(response.data);
-       }) 
-    }
+     const todayInvoices = () => {
+      axios.get("https://localhost:7103/api/Invoices/today/invoices").then(response=>{
+        setProducts(response.data)
+      })
+     }
+     const getSearchedInvoices = () => {
+      axios.get("https://localhost:7103/api/Invoices/searched/"+searched).then(response=>{
+        setProducts(response.data)
+      })
+     }
+    
   return (
   <>
   <div className='d-flex justify-content-between'>
        <div>
         <input type='search' onChange={getSearch} />
-        <Button variant='primary' className='ml-2'><i className='bi bi-search'></i></Button>
+        <Button variant='primary' className='ml-2' onClick={()=> getSearchedInvoices()}><i className='bi bi-search'></i></Button>
+       </div>
+       <div>
+        <Button variant='warning' onClick={()=>todayInvoices()}>Today Invoices</Button>
        </div>
        <div>
        <input type='date' onChange={getDate}/>
@@ -147,6 +154,11 @@ function InvoicesTable() {
        </div>
   </div>
   <div className='dashboard-table'>
+    {
+      products=="" ? 
+      <div className='text-center mt-5'>
+        <b>0 invoices</b>
+      </div> :
     <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -169,8 +181,11 @@ function InvoicesTable() {
             <td>{product.customerEmail}</td>
             <td>{product.date}</td>
             <td>{product.time}</td>
-            <td><Button onClick={()=>handleShow(product.id)}><i className='bi bi-pen'></i></Button></td>
-            <td><Button variant='danger' onClick={()=> deleteProduct(product.id)}><i className='bi bi-trash'></i></Button></td>
+            <td>
+              <Link to={'get/invoice/'+product.invoiceId} target="_blank">
+              <Button><i className='bi bi-ticket-detailed'></i></Button>
+              </Link>
+            </td>
             </tr>
             </>
             
@@ -192,6 +207,7 @@ function InvoicesTable() {
     </tbody>
     
   </Table>
+}
   </div>
   <Modal show={showM} onHide={handleClose} className='text-center'>
   <Modal.Header closeButton>
@@ -223,6 +239,7 @@ function InvoicesTable() {
     </Button>
   </Modal.Footer>
 </Modal>
+
 </>
   )
 }

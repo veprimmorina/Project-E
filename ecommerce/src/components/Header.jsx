@@ -12,7 +12,7 @@ const [userName, setUserName]=useState(localStorage.getItem(9));
     axios.get('https://localhost:7103/api/Contacs/unchecked/comments').then(response=>{
      setComments(response.data);
   })
-})
+},[])
     return (
         <Navbar expand="lg"  style={{background: "#e5e7eb"}}>
           <Container>

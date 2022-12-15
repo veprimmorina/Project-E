@@ -12,6 +12,7 @@ import LogIn from "./components/LogIn";
 import DashboardLogIn from "./components/DashboardLogIn";
 import { Helmet } from "react-helmet";
 import Payment from "./components/Payment";
+import InvoiceIdTable from "./components/InvoiceIdTable";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
       <Route path="/log/in" element={<LogIn />}></Route>
       <Route path="dashboard/log/in" element={<DashboardLogIn />}></Route>
       <Route path="/register" element={<Payment />}></Route>
+      <Route path="/dashboard/get/invoice/:id" element={<InvoiceIdTable />}></Route>
     </Routes>
    </BrowserRouter>
     </>

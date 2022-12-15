@@ -34,24 +34,24 @@ function MainPageDashboard() {
     <>
     <div className='row mt-5'>
         <div className='col-md'>
-            <DashboardCard key={"5"} title={"Products"} quantity={products}/>
+            <DashboardCard key={"products"} title={"Products"} quantity={products}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"5"} title={"Total Invoices"} quantity={invoice}/>
+            <DashboardCard key={"total invoices"}  title={"Total Invoices"} quantity={invoice}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"5"} title={"Today Invoices"} quantity={todayInvoice}/>
+            <DashboardCard key={"today"} title={"Today Invoices"} quantity={todayInvoice}/>
         </div>
     </div>
     <div className='row mt-5'>
         <div className='col-md'>
-            <DashboardCard key={"5"} title={"Total orders"} quantity={invoice}/>
+            <DashboardCard key={"tO"}  title={"Total orders"} quantity={invoice}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"5"} title={"Feedbacks"} quantity={feedbacks}/>
+            <DashboardCard key={"feedback"}  title={"Feedbacks"} quantity={feedbacks}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"5"} title='Notification' quantity={comments}/>
+            <DashboardCard key={"Notification"}  title='Notification' quantity={comments}/>
         </div>
         </div>
     

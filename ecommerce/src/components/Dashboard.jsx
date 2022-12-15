@@ -161,7 +161,7 @@ useEffect(()=>{
      })    
   });
   id!=undefined ? showContacts() : doSomething()
-})
+},[])
 const options = {
   exportEnabled: true,
   animationEnabled: true,

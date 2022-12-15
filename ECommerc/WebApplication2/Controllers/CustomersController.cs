@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2;
 using WebApplication2.Models;
-
 namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +35,7 @@ namespace WebApplication2.Controllers
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
             var customer = await _context.customers.FindAsync(id);
-
+           
             if (customer == null)
             {
                 return NotFound();
@@ -180,12 +179,38 @@ namespace WebApplication2.Controllers
             return await _context.customers.OrderByDescending(x => x.bought).ToListAsync();
         }
         [HttpGet("customer/by/email/{getemail}")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomerByEmail(string getemail)
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomerByEmail(string getemail, Customer c)
         {
-           return await _context.customers.Where(x=> x.CustomerEmail.Equals(getemail)).ToListAsync();
+           var customer = await _context.customers.Where(x=> x.CustomerEmail.Equals(getemail)).ToListAsync();
+            return customer;
+        }
+        [HttpGet("new/order/{email}/{price}")]
+        public async Task<ActionResult<Customer>> NewOrder(string email, int price)
+        {
+            var customer = await _context.customers.Where(x => x.CustomerEmail.Equals(email)).FirstOrDefaultAsync();
 
-           
-
+            if (customer == null)
+            {
+                Customer c = new Customer();
+                c.CustomerSurname = "";
+                c.CustomerPhone = "";
+                c.CustomerEmail = email;
+                c.CustomerName = "";
+                c.Code = price;
+                c.CustomerPassword = "";
+                c.CustomerAdress = "";
+                c.bought = 1;
+                _context.customers.AddAsync(c);
+                await _context.SaveChangesAsync();
+                return customer;
+            }
+            else
+            {
+                customer.bought = customer.bought + 1;
+                customer.Code = customer.Code + price;
+                await _context.SaveChangesAsync();
+                return customer;
+            }
         }
     }
     }

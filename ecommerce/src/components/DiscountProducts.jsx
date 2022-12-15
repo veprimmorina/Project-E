@@ -13,7 +13,7 @@ function DiscountProducts({item, handleClick}) {
                   <div className="card shadow">
                     <div className="d-flex justify-content-between p-3 sold">
                       <p className="lead mb-0">{category}</p> 
-                        <img classname="avatar rounded-circle img-fluid"  src={madeInPhoto}  style={{width: "40px", height: "25px"}} />
+                        <img className="avatar rounded-circle img-fluid"  src={madeInPhoto}  style={{width: "40px", height: "25px"}} />
                     </div>
                     
                     <img src={photoPath}
@@ -43,7 +43,7 @@ function DiscountProducts({item, handleClick}) {
           
           <div className="d-flex justify-content-between p-3" >
             <p className="lead mb-0">{category}</p> 
-              <img classname="avatar rounded-circle img-fluid" src={madeInPhoto} style={{width: "40px", height: "25px"}} />
+              <img className="avatar rounded-circle img-fluid" src={madeInPhoto} style={{width: "40px", height: "25px"}} />
           </div>
           <img src={photoPath}
             className="card-img-top" alt="Laptop" />

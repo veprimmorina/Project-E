@@ -137,6 +137,13 @@ body{
 .modal-payment{
     background-image: url('');
 }
+.invoice{
+    height: 1200px;
+    overflow-x: auto;
+}
+.invoice-details{
+    width: 100%;
+}
 .an{
     text-decoration: none;
 }
