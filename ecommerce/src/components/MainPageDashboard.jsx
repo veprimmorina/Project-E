@@ -12,6 +12,9 @@ function MainPageDashboard() {
     const [todayInvoice, setTodayInvoice] = useState();
     const [feedbacks, setFeedbacks] = useState();
     const [comments, setComments] = useState();
+    const [customers, setCustomers] = useState()
+    const [incomes, setIncomes] = useState()
+    const [outOfStock, setOutOfStock] = useState()
 
     useEffect(()=>{
         axios.get("https://localhost:7103/api/Products/count/products").then(response=>{
@@ -29,31 +32,51 @@ function MainPageDashboard() {
         axios.get("https://localhost:7103/api/Contacs/count/unchecked/comments").then(response=>{
             setComments(response.data)
         })
+        axios.get("https://localhost:7103/api/Customers/get/total/incomes").then(response=>{
+            setIncomes(response.data)
+        })
+        axios.get("https://localhost:7103/api/Customers/get/customers").then(response=>{
+            setCustomers(response.data)
+        })
+        axios.get("https://localhost:7103/api/Products/product/out").then(response=>{
+            setOutOfStock(response.data)
+        })
     },[])
   return (
     <>
     <div className='row mt-5'>
         <div className='col-md'>
-            <DashboardCard key={"products"} title={"Products"} quantity={products}/>
+            <DashboardCard key={products} title={"Products"} quantity={products}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"total invoices"}  title={"Total Invoices"} quantity={invoice}/>
+            <DashboardCard key={invoice}  title={"Total Invoices"} quantity={invoice}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"today"} title={"Today Invoices"} quantity={todayInvoice}/>
+            <DashboardCard key={todayInvoice} title={"Today Invoices"} quantity={todayInvoice}/>
         </div>
     </div>
     <div className='row mt-5'>
         <div className='col-md'>
-            <DashboardCard key={"tO"}  title={"Total orders"} quantity={invoice}/>
+            <DashboardCard key={invoice}  title={"Total orders"} quantity={invoice}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"feedback"}  title={"Feedbacks"} quantity={feedbacks}/>
+            <DashboardCard key={feedbacks}  title={"Feedbacks"} quantity={feedbacks}/>
         </div>
         <div className='col-md'>
-            <DashboardCard key={"Notification"}  title='Notification' quantity={comments}/>
+            <DashboardCard key={comments}  title='Notification' quantity={comments}/>
         </div>
+    </div>
+    <div className='row mt-5'>
+        <div className='col-md'>
+            <DashboardCard key={incomes}  title={"Total Incomes"} quantity={incomes}/>
         </div>
+        <div className='col-md'>
+            <DashboardCard key={customers}  title={"Customers"} quantity={customers}/>
+        </div>
+        <div className='col-md'>
+            <DashboardCard key={outOfStock}  title='Out Of Stock' quantity={outOfStock}/>
+        </div>
+    </div>
     
     </>
     

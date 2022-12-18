@@ -21,6 +21,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
           "Stripe.net": "41.1.0",
           "Swashbuckle.AspNetCore": "6.4.0",
+          "Syncfusion.Pdf.Net.Core": "20.3.0.61",
           "System.IdentityModel.Tokens.Jwt": "6.25.0",
           "iTextSharp": "5.5.13.3"
         },
@@ -1820,6 +1821,35 @@
           }
         }
       },
+      "Syncfusion.Compression.Net.Core/20.3.0.61": {
+        "runtime": {
+          "lib/net6.0/Syncfusion.Compression.Portable.dll": {
+            "assemblyVersion": "20.3600.0.61",
+            "fileVersion": "20.3600.0.61"
+          }
+        }
+      },
+      "Syncfusion.Licensing/20.3.0.61": {
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "20.3.0.61",
+            "fileVersion": "20.3.0.61"
+          }
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/20.3.0.61": {
+        "dependencies": {
+          "Syncfusion.Compression.Net.Core": "20.3.0.61",
+          "Syncfusion.Licensing": "20.3.0.61",
+          "System.Text.Encoding.CodePages": "4.7.0"
+        },
+        "runtime": {
+          "lib/net6.0/Syncfusion.Pdf.Portable.dll": {
+            "assemblyVersion": "20.3600.0.61",
+            "fileVersion": "20.3600.0.61"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -3556,6 +3586,27 @@
       "sha512": "sha512-1Hh3atb3pi8c+v7n4/3N80Jj8RvLOXgWxzix6w3OZhB7zBGRwsy7FWr4e3hwgPweSBpwfElqj4V4nkjYabH9nQ==",
       "path": "swashbuckle.aspnetcore.swaggerui/6.4.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+    },
+    "Syncfusion.Compression.Net.Core/20.3.0.61": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ppi4hLVql2j72nKKopJDqC2efNQRE/PVzROwMDkdPLH05Os7quvwF06A+M1XZt9MaSk4sLQrtxvU1ExIBhqIng==",
+      "path": "syncfusion.compression.net.core/20.3.0.61",
+      "hashPath": "syncfusion.compression.net.core.20.3.0.61.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/20.3.0.61": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s0RnBre4NXVKjsUOXIUx90NM+Mw6Exp3Y2MH81GvQBSW/8RSfwFKYzI20AjOXKXPicxn+n/WMlb/6VIiQj+qsQ==",
+      "path": "syncfusion.licensing/20.3.0.61",
+      "hashPath": "syncfusion.licensing.20.3.0.61.nupkg.sha512"
+    },
+    "Syncfusion.Pdf.Net.Core/20.3.0.61": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UBT0wWEnG6dOoRbkBdTPPjqtKvrziwkmrMh0ktC1BZ+qLX9a1hihwWL0jNYmFfYR4tsned4HoSLTV0GsqW3NiQ==",
+      "path": "syncfusion.pdf.net.core/20.3.0.61",
+      "hashPath": "syncfusion.pdf.net.core.20.3.0.61.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

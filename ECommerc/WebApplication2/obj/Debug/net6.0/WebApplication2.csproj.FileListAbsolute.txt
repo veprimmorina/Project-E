@@ -539,3 +539,6 @@ C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Mic
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Stripe.net.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Syncfusion.Compression.Portable.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Syncfusion.Licensing.dll
+C:\Users\TECHCOM\Desktop\Project-E\ECommerc\WebApplication2\bin\Debug\net6.0\Syncfusion.Pdf.Portable.dll

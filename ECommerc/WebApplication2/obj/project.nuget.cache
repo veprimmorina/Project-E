@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SwSkZ3/2XSAPufmC7VxBiLLf4WNPCKN7axNPpykN8YgHIf7sEY7rBIXoC9RFEIfNsjPwsS2aiz49pFjPLOvw3A==",
+  "dgSpecHash": "nVe9zCudZsYIX1cLC0h/8ea1asqu1FCuvekF21vJjqZdfNan85rUqKXmp7VT+OswTsnR+bGdkKt7Q8oSFabeAQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\TECHCOM\\Desktop\\Project-E\\ECommerc\\WebApplication2\\WebApplication2.csproj",
   "expectedPackageFiles": [
@@ -138,6 +138,9 @@
     "C:\\Users\\TECHCOM\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\TECHCOM\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "C:\\Users\\TECHCOM\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
+    "C:\\Users\\TECHCOM\\.nuget\\packages\\syncfusion.compression.net.core\\20.3.0.61\\syncfusion.compression.net.core.20.3.0.61.nupkg.sha512",
+    "C:\\Users\\TECHCOM\\.nuget\\packages\\syncfusion.licensing\\20.3.0.61\\syncfusion.licensing.20.3.0.61.nupkg.sha512",
+    "C:\\Users\\TECHCOM\\.nuget\\packages\\syncfusion.pdf.net.core\\20.3.0.61\\syncfusion.pdf.net.core.20.3.0.61.nupkg.sha512",
     "C:\\Users\\TECHCOM\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\TECHCOM\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\TECHCOM\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

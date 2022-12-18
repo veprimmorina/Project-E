@@ -314,6 +314,11 @@ namespace WebApplication2.Controllers
         {
             return await _context.products.CountAsync();
         }
+        [HttpGet("product/out")]
+        public async Task<int> GetOutOfStockProduct()
+        {
+            return await _context.products.Where(x => x.Quantity == 0).CountAsync();
+        }
         private bool ProductExists(int id)
         {
             return _context.products.Any(e => e.Id == id);

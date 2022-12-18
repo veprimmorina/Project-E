@@ -212,5 +212,24 @@ namespace WebApplication2.Controllers
                 return customer;
             }
         }
+
+        [HttpGet("get/customers")]
+        public async Task<int> GetCustomersNumber()
+        {
+            return await _context.customers.CountAsync();
+        }
+
+        [HttpGet("get/total/incomes")]
+        public async Task<int> GetTotalIncomes()
+        {
+            var customers = await _context.customers.ToListAsync();
+            int incomes = 0;
+            foreach (var customer in customers)
+            {
+                incomes += customer.Code;
+            }
+
+            return incomes;
+        }
     }
     }
