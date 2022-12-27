@@ -143,6 +143,14 @@ body{
 }
 .invoice-details{
     width: 100%;
+    background-color: white;
+}
+.invoice-title{
+    color: blue;
+}
+.invoice-border{
+    border-top: 5px solid blue;
+    border-bottom: 5px solid blue;
 }
 .an{
     text-decoration: none;

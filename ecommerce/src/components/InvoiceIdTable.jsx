@@ -27,37 +27,48 @@ function InvoiceIdTable() {
           <div className='d-flex justify-content-between'>
               <img src='https://dojiw2m9tvv09.cloudfront.net/13191/brand/nugget-logo.png' />
               <div className='mt-5'>
-                <p>Nugget Market</p>
-                <p>771 Pleasant Grove Blvd, Roseville, CA 95678, United States</p>
+                <b>Nugget Market</b>
+                <p>771 Pleasant Grove Blvd </p>
+                <p> Roseville, CA 95678, </p>
+                <p>United States</p>
+                <p>+345 255 56 5458</p>
               </div>
               
           </div>
           <div className='d-flex justify-content-between pb-5'>
             <div className='d-flex mt-4'>
-            <b>Invoice code: </b><p>{invoice.invoiceId}</p>
-            <b className='ml-3'>Time: </b><p>{invoice.time}</p>
-            <b className='ml-3'>Date: </b><p>{invoice.date}</p>
+            <b className='invoice-title'>Invoice code: </b><p>{invoice.invoiceId}</p>
+            <b className='ml-3 invoice-title'>Time: </b><p>{invoice.time}</p>
+            <b className='ml-3 invoice-title'>Date: </b><p>{invoice.date}</p>
             </div>
+            
             <div className='border border-dark rounded'>
               <p>Name: {invoice.customerName}</p>
               <p>Email: {invoice.customerEmail}</p>
             </div>
           </div>
           
-          
+          <div className='invoice-border'>
           {
             
             invoiceArray.map((invoice) => (
                 <InvoiceDetails key={invoice} invoice={invoice} />
               ))
           }
-         
+          </div>
+        <div className='text-center'>
+          <div>
+            <b>Thank you for choosing Us! </b>
+          </div>
+          <b>Nugget Market</b>
+        </div>     
       </div>
       
       <div className=''>
         <p></p>
       </div>
     </div>
+    
    </>
   )
 }
