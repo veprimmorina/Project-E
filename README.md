@@ -1,5 +1,7 @@
-# Project-E
-E-Commerce_Project
+# E-Commerce_Web_App
+
+Technology used: ASP.NET Core, C#, JavaScript, ReactJS, Bootstrap, MSSQL.
+
 
 E-Commerce is a website created to allow customers to order and buy products online using this website. he primary objective of this web application is to provide a user-friendly interface that enables customers to easily find and purchase the products they need. The home page of the e-commerce website provides customers with a search bar, where they can enter the name or description of the product they want to purchase. The application will then display a list of products matching their search criteria, and users can browse through the different products, view images, and also read product descriptions.
 
